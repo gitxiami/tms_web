@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.OperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.OperationLog" >
+    <id column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+    <result column="OP_ID" property="opId" jdbcType="VARCHAR" />
+    <result column="OP_USERNAME" property="opUsername" jdbcType="VARCHAR" />
+    <result column="OP_IP" property="opIp" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="LOG_CODE" property="logCode" jdbcType="VARCHAR" />
+    <result column="LOG_NAME" property="logName" jdbcType="VARCHAR" />
+    <result column="LOG_STATUS" property="logStatus" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOG_ID, OP_ID, OP_USERNAME, OP_IP, ORG_ID, LOG_CODE, LOG_NAME, LOG_STATUS, CREATED_DATETIME, 
+    UPDATE_DATETIME, BAK1, BAK2, BAK3, ORG_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.OperationLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_OPERATION_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_OPERATION_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_OPERATION_LOG
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.OperationLogExample" >
+    delete from TBL_OPERATION_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.OperationLog" >
+    insert into TBL_OPERATION_LOG (LOG_ID, OP_ID, OP_USERNAME, 
+      OP_IP, ORG_ID, LOG_CODE, 
+      LOG_NAME, LOG_STATUS, CREATED_DATETIME, 
+      UPDATE_DATETIME, BAK1, BAK2, 
+      BAK3, ORG_NAME)
+    values (#{logId,jdbcType=VARCHAR}, #{opId,jdbcType=VARCHAR}, #{opUsername,jdbcType=VARCHAR}, 
+      #{opIp,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{logCode,jdbcType=VARCHAR}, 
+      #{logName,jdbcType=VARCHAR}, #{logStatus,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, 
+      #{bak3,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.OperationLog" >
+    insert into TBL_OPERATION_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="opId != null" >
+        OP_ID,
+      </if>
+      <if test="opUsername != null" >
+        OP_USERNAME,
+      </if>
+      <if test="opIp != null" >
+        OP_IP,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="logCode != null" >
+        LOG_CODE,
+      </if>
+      <if test="logName != null" >
+        LOG_NAME,
+      </if>
+      <if test="logStatus != null" >
+        LOG_STATUS,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="opUsername != null" >
+        #{opUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="opIp != null" >
+        #{opIp,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="logCode != null" >
+        #{logCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logName != null" >
+        #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null" >
+        #{logStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.OperationLogExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_OPERATION_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_OPERATION_LOG
+    <set >
+      <if test="record.logId != null" >
+        LOG_ID = #{record.logId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opId != null" >
+        OP_ID = #{record.opId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opUsername != null" >
+        OP_USERNAME = #{record.opUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opIp != null" >
+        OP_IP = #{record.opIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logCode != null" >
+        LOG_CODE = #{record.logCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logName != null" >
+        LOG_NAME = #{record.logName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logStatus != null" >
+        LOG_STATUS = #{record.logStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_OPERATION_LOG
+    set LOG_ID = #{record.logId,jdbcType=VARCHAR},
+      OP_ID = #{record.opId,jdbcType=VARCHAR},
+      OP_USERNAME = #{record.opUsername,jdbcType=VARCHAR},
+      OP_IP = #{record.opIp,jdbcType=VARCHAR},
+      ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      LOG_CODE = #{record.logCode,jdbcType=VARCHAR},
+      LOG_NAME = #{record.logName,jdbcType=VARCHAR},
+      LOG_STATUS = #{record.logStatus,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.OperationLog" >
+    update TBL_OPERATION_LOG
+    <set >
+      <if test="opId != null" >
+        OP_ID = #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="opUsername != null" >
+        OP_USERNAME = #{opUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="opIp != null" >
+        OP_IP = #{opIp,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="logCode != null" >
+        LOG_CODE = #{logCode,jdbcType=VARCHAR},
+      </if>
+      <if test="logName != null" >
+        LOG_NAME = #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null" >
+        LOG_STATUS = #{logStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.OperationLog" >
+    update TBL_OPERATION_LOG
+    set OP_ID = #{opId,jdbcType=VARCHAR},
+      OP_USERNAME = #{opUsername,jdbcType=VARCHAR},
+      OP_IP = #{opIp,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      LOG_CODE = #{logCode,jdbcType=VARCHAR},
+      LOG_NAME = #{logName,jdbcType=VARCHAR},
+      LOG_STATUS = #{logStatus,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

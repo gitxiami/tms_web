@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+target/
+node_modules/
+syd_tms.iml
+.classpath
+.settings
+.project
+*.log
+/src/main/test/
+/oversea_tms.iml

@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.Device" >
+    <id column="DEVICE_ID" property="deviceId" jdbcType="VARCHAR" />
+    <result column="DEVICE_SN" property="deviceSn" jdbcType="VARCHAR" />
+    <result column="PSAM_ID" property="psamId" jdbcType="VARCHAR" />
+    <result column="MCHNT_ID" property="mchntId" jdbcType="VARCHAR" />
+    <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
+    <result column="DEVICE_TYPE_FLAG" property="deviceTypeFlag" jdbcType="VARCHAR" />
+    <result column="DEVICE_STATUS" property="deviceStatus" jdbcType="VARCHAR" />
+    <result column="DEVICE_LIMIT_STATUS" property="deviceLimitStatus" jdbcType="VARCHAR" />
+    <result column="APP_LOGIN_PWD" property="appLoginPwd" jdbcType="VARCHAR" />
+    <result column="DEV_KEY_ALG_TYPE" property="devKeyAlgType" jdbcType="VARCHAR" />
+    <result column="DEV_TMK_STATUS" property="devTmkStatus" jdbcType="VARCHAR" />
+    <result column="DEV_TMK_UPDATE_DATETIME" property="devTmkUpdateDatetime" jdbcType="VARCHAR" />
+    <result column="KEY_OP_ID" property="keyOpId" jdbcType="VARCHAR" />
+    <result column="DEV_TMK" property="devTmk" jdbcType="VARCHAR" />
+    <result column="DEV_TMK_CHECK" property="devTmkCheck" jdbcType="VARCHAR" />
+    <result column="DEV_SING_IN_DATETIME" property="devSingInDatetime" jdbcType="VARCHAR" />
+    <result column="DEV_SIGN_OUT_DATETIME" property="devSignOutDatetime" jdbcType="VARCHAR" />
+    <result column="DEV_PIK" property="devPik" jdbcType="VARCHAR" />
+    <result column="DEV_PIK_CHECK" property="devPikCheck" jdbcType="VARCHAR" />
+    <result column="DEV_MAK" property="devMak" jdbcType="VARCHAR" />
+    <result column="DEV_MAK_CHECK" property="devMakCheck" jdbcType="VARCHAR" />
+    <result column="DEV_TK" property="devTk" jdbcType="VARCHAR" />
+    <result column="DEV_TK_CHECK" property="devTkCheck" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="VARCHAR" />
+    <result column="LATITUDE" property="latitude" jdbcType="VARCHAR" />
+    <result column="RADIUS" property="radius" jdbcType="VARCHAR" />
+    <result column="VERSION" property="version" jdbcType="VARCHAR" />
+    <result column="DEV_ONADD" property="devOnadd" jdbcType="VARCHAR" />
+    <result column="BUSI_TYPE" property="busiType" jdbcType="VARCHAR" />
+    <result column="SCAN_CODE" property="scanCode" jdbcType="VARCHAR" />
+    <result column="MSC_CODE" property="mscCode" jdbcType="VARCHAR" />
+    <result column="TOUCH_IC_READ" property="touchIcRead" jdbcType="VARCHAR" />
+    <result column="NON_TOUCH_IC_READ" property="nonTouchIcRead" jdbcType="VARCHAR" />
+    <result column="NO_CARD_PADY" property="noCardPady" jdbcType="VARCHAR" />
+    <result column="LY_NAME" property="lyName" jdbcType="VARCHAR" />
+    <result column="LY_DATE" property="lyDate" jdbcType="VARCHAR" />
+    <result column="DEV_OP_ID" property="devOpId" jdbcType="VARCHAR" />
+    <result column="STAMP_DATETIME" property="stampDatetime" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+    <result column="MODEL_ID" property="modelId" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="BRAND_ID" property="brandId" jdbcType="VARCHAR" />
+    <result column="DEVICE_HW_VERSION" property="deviceHwVersion" jdbcType="VARCHAR" />
+    <result column="DEVICE_SW_VERSION" property="deviceSwVersion" jdbcType="VARCHAR" />
+    <result column="MERCHANT_NAME" property="merchantName" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DEVICE_ID, DEVICE_SN, PSAM_ID, MCHNT_ID, BATCH_NO, DEVICE_TYPE_FLAG, DEVICE_STATUS, 
+    DEVICE_LIMIT_STATUS, APP_LOGIN_PWD, DEV_KEY_ALG_TYPE, DEV_TMK_STATUS, DEV_TMK_UPDATE_DATETIME, 
+    KEY_OP_ID, DEV_TMK, DEV_TMK_CHECK, DEV_SING_IN_DATETIME, DEV_SIGN_OUT_DATETIME, DEV_PIK, 
+    DEV_PIK_CHECK, DEV_MAK, DEV_MAK_CHECK, DEV_TK, DEV_TK_CHECK, LONGITUDE, LATITUDE, 
+    RADIUS, VERSION, DEV_ONADD, BUSI_TYPE, SCAN_CODE, MSC_CODE, TOUCH_IC_READ, NON_TOUCH_IC_READ, 
+    NO_CARD_PADY, LY_NAME, LY_DATE, DEV_OP_ID, STAMP_DATETIME, CREATE_DATETIME, UPDATE_DATETIME, 
+    BAK1, BAK2, BAK3, MODEL_ID, ORG_ID, BRAND_ID, DEVICE_HW_VERSION, DEVICE_SW_VERSION, 
+    MERCHANT_NAME, GROUP_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE
+    where DEVICE_ID = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_DEVICE
+    where DEVICE_ID = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.DeviceExample" >
+    delete from TBL_DEVICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.Device" >
+    insert into TBL_DEVICE (DEVICE_ID, DEVICE_SN, PSAM_ID, 
+      MCHNT_ID, BATCH_NO, DEVICE_TYPE_FLAG, 
+      DEVICE_STATUS, DEVICE_LIMIT_STATUS, APP_LOGIN_PWD, 
+      DEV_KEY_ALG_TYPE, DEV_TMK_STATUS, DEV_TMK_UPDATE_DATETIME, 
+      KEY_OP_ID, DEV_TMK, DEV_TMK_CHECK, 
+      DEV_SING_IN_DATETIME, DEV_SIGN_OUT_DATETIME, 
+      DEV_PIK, DEV_PIK_CHECK, DEV_MAK, 
+      DEV_MAK_CHECK, DEV_TK, DEV_TK_CHECK, 
+      LONGITUDE, LATITUDE, RADIUS, 
+      VERSION, DEV_ONADD, BUSI_TYPE, 
+      SCAN_CODE, MSC_CODE, TOUCH_IC_READ, 
+      NON_TOUCH_IC_READ, NO_CARD_PADY, LY_NAME, 
+      LY_DATE, DEV_OP_ID, STAMP_DATETIME, 
+      CREATE_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3, MODEL_ID, 
+      ORG_ID, BRAND_ID, DEVICE_HW_VERSION, 
+      DEVICE_SW_VERSION, MERCHANT_NAME, GROUP_ID
+      )
+    values (#{deviceId,jdbcType=VARCHAR}, #{deviceSn,jdbcType=VARCHAR}, #{psamId,jdbcType=VARCHAR}, 
+      #{mchntId,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, #{deviceTypeFlag,jdbcType=VARCHAR}, 
+      #{deviceStatus,jdbcType=VARCHAR}, #{deviceLimitStatus,jdbcType=VARCHAR}, #{appLoginPwd,jdbcType=VARCHAR}, 
+      #{devKeyAlgType,jdbcType=VARCHAR}, #{devTmkStatus,jdbcType=VARCHAR}, #{devTmkUpdateDatetime,jdbcType=VARCHAR}, 
+      #{keyOpId,jdbcType=VARCHAR}, #{devTmk,jdbcType=VARCHAR}, #{devTmkCheck,jdbcType=VARCHAR}, 
+      #{devSingInDatetime,jdbcType=VARCHAR}, #{devSignOutDatetime,jdbcType=VARCHAR}, 
+      #{devPik,jdbcType=VARCHAR}, #{devPikCheck,jdbcType=VARCHAR}, #{devMak,jdbcType=VARCHAR}, 
+      #{devMakCheck,jdbcType=VARCHAR}, #{devTk,jdbcType=VARCHAR}, #{devTkCheck,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, #{radius,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{devOnadd,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, 
+      #{scanCode,jdbcType=VARCHAR}, #{mscCode,jdbcType=VARCHAR}, #{touchIcRead,jdbcType=VARCHAR}, 
+      #{nonTouchIcRead,jdbcType=VARCHAR}, #{noCardPady,jdbcType=VARCHAR}, #{lyName,jdbcType=VARCHAR}, 
+      #{lyDate,jdbcType=VARCHAR}, #{devOpId,jdbcType=VARCHAR}, #{stampDatetime,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR}, #{modelId,jdbcType=VARCHAR}, 
+      #{orgId,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, #{deviceHwVersion,jdbcType=VARCHAR}, 
+      #{deviceSwVersion,jdbcType=VARCHAR}, #{merchantName,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.Device" >
+    insert into TBL_DEVICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="deviceSn != null" >
+        DEVICE_SN,
+      </if>
+      <if test="psamId != null" >
+        PSAM_ID,
+      </if>
+      <if test="mchntId != null" >
+        MCHNT_ID,
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO,
+      </if>
+      <if test="deviceTypeFlag != null" >
+        DEVICE_TYPE_FLAG,
+      </if>
+      <if test="deviceStatus != null" >
+        DEVICE_STATUS,
+      </if>
+      <if test="deviceLimitStatus != null" >
+        DEVICE_LIMIT_STATUS,
+      </if>
+      <if test="appLoginPwd != null" >
+        APP_LOGIN_PWD,
+      </if>
+      <if test="devKeyAlgType != null" >
+        DEV_KEY_ALG_TYPE,
+      </if>
+      <if test="devTmkStatus != null" >
+        DEV_TMK_STATUS,
+      </if>
+      <if test="devTmkUpdateDatetime != null" >
+        DEV_TMK_UPDATE_DATETIME,
+      </if>
+      <if test="keyOpId != null" >
+        KEY_OP_ID,
+      </if>
+      <if test="devTmk != null" >
+        DEV_TMK,
+      </if>
+      <if test="devTmkCheck != null" >
+        DEV_TMK_CHECK,
+      </if>
+      <if test="devSingInDatetime != null" >
+        DEV_SING_IN_DATETIME,
+      </if>
+      <if test="devSignOutDatetime != null" >
+        DEV_SIGN_OUT_DATETIME,
+      </if>
+      <if test="devPik != null" >
+        DEV_PIK,
+      </if>
+      <if test="devPikCheck != null" >
+        DEV_PIK_CHECK,
+      </if>
+      <if test="devMak != null" >
+        DEV_MAK,
+      </if>
+      <if test="devMakCheck != null" >
+        DEV_MAK_CHECK,
+      </if>
+      <if test="devTk != null" >
+        DEV_TK,
+      </if>
+      <if test="devTkCheck != null" >
+        DEV_TK_CHECK,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="radius != null" >
+        RADIUS,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="devOnadd != null" >
+        DEV_ONADD,
+      </if>
+      <if test="busiType != null" >
+        BUSI_TYPE,
+      </if>
+      <if test="scanCode != null" >
+        SCAN_CODE,
+      </if>
+      <if test="mscCode != null" >
+        MSC_CODE,
+      </if>
+      <if test="touchIcRead != null" >
+        TOUCH_IC_READ,
+      </if>
+      <if test="nonTouchIcRead != null" >
+        NON_TOUCH_IC_READ,
+      </if>
+      <if test="noCardPady != null" >
+        NO_CARD_PADY,
+      </if>
+      <if test="lyName != null" >
+        LY_NAME,
+      </if>
+      <if test="lyDate != null" >
+        LY_DATE,
+      </if>
+      <if test="devOpId != null" >
+        DEV_OP_ID,
+      </if>
+      <if test="stampDatetime != null" >
+        STAMP_DATETIME,
+      </if>
+      <if test="createDatetime != null" >
+        CREATE_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+      <if test="modelId != null" >
+        MODEL_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="brandId != null" >
+        BRAND_ID,
+      </if>
+      <if test="deviceHwVersion != null" >
+        DEVICE_HW_VERSION,
+      </if>
+      <if test="deviceSwVersion != null" >
+        DEVICE_SW_VERSION,
+      </if>
+      <if test="merchantName != null" >
+        MERCHANT_NAME,
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSn != null" >
+        #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="psamId != null" >
+        #{psamId,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntId != null" >
+        #{mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeFlag != null" >
+        #{deviceTypeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null" >
+        #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceLimitStatus != null" >
+        #{deviceLimitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="appLoginPwd != null" >
+        #{appLoginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="devKeyAlgType != null" >
+        #{devKeyAlgType,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmkStatus != null" >
+        #{devTmkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmkUpdateDatetime != null" >
+        #{devTmkUpdateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="keyOpId != null" >
+        #{keyOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmk != null" >
+        #{devTmk,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmkCheck != null" >
+        #{devTmkCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="devSingInDatetime != null" >
+        #{devSingInDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="devSignOutDatetime != null" >
+        #{devSignOutDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="devPik != null" >
+        #{devPik,jdbcType=VARCHAR},
+      </if>
+      <if test="devPikCheck != null" >
+        #{devPikCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="devMak != null" >
+        #{devMak,jdbcType=VARCHAR},
+      </if>
+      <if test="devMakCheck != null" >
+        #{devMakCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="devTk != null" >
+        #{devTk,jdbcType=VARCHAR},
+      </if>
+      <if test="devTkCheck != null" >
+        #{devTkCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="radius != null" >
+        #{radius,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="devOnadd != null" >
+        #{devOnadd,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null" >
+        #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="scanCode != null" >
+        #{scanCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mscCode != null" >
+        #{mscCode,jdbcType=VARCHAR},
+      </if>
+      <if test="touchIcRead != null" >
+        #{touchIcRead,jdbcType=VARCHAR},
+      </if>
+      <if test="nonTouchIcRead != null" >
+        #{nonTouchIcRead,jdbcType=VARCHAR},
+      </if>
+      <if test="noCardPady != null" >
+        #{noCardPady,jdbcType=VARCHAR},
+      </if>
+      <if test="lyName != null" >
+        #{lyName,jdbcType=VARCHAR},
+      </if>
+      <if test="lyDate != null" >
+        #{lyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="devOpId != null" >
+        #{devOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="stampDatetime != null" >
+        #{stampDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceHwVersion != null" >
+        #{deviceHwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSwVersion != null" >
+        #{deviceSwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_DEVICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_DEVICE
+    <set >
+      <if test="record.deviceId != null" >
+        DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceSn != null" >
+        DEVICE_SN = #{record.deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.psamId != null" >
+        PSAM_ID = #{record.psamId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntId != null" >
+        MCHNT_ID = #{record.mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchNo != null" >
+        BATCH_NO = #{record.batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeFlag != null" >
+        DEVICE_TYPE_FLAG = #{record.deviceTypeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceStatus != null" >
+        DEVICE_STATUS = #{record.deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceLimitStatus != null" >
+        DEVICE_LIMIT_STATUS = #{record.deviceLimitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appLoginPwd != null" >
+        APP_LOGIN_PWD = #{record.appLoginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devKeyAlgType != null" >
+        DEV_KEY_ALG_TYPE = #{record.devKeyAlgType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTmkStatus != null" >
+        DEV_TMK_STATUS = #{record.devTmkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTmkUpdateDatetime != null" >
+        DEV_TMK_UPDATE_DATETIME = #{record.devTmkUpdateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyOpId != null" >
+        KEY_OP_ID = #{record.keyOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTmk != null" >
+        DEV_TMK = #{record.devTmk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTmkCheck != null" >
+        DEV_TMK_CHECK = #{record.devTmkCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devSingInDatetime != null" >
+        DEV_SING_IN_DATETIME = #{record.devSingInDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devSignOutDatetime != null" >
+        DEV_SIGN_OUT_DATETIME = #{record.devSignOutDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devPik != null" >
+        DEV_PIK = #{record.devPik,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devPikCheck != null" >
+        DEV_PIK_CHECK = #{record.devPikCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devMak != null" >
+        DEV_MAK = #{record.devMak,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devMakCheck != null" >
+        DEV_MAK_CHECK = #{record.devMakCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTk != null" >
+        DEV_TK = #{record.devTk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTkCheck != null" >
+        DEV_TK_CHECK = #{record.devTkCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radius != null" >
+        RADIUS = #{record.radius,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        VERSION = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devOnadd != null" >
+        DEV_ONADD = #{record.devOnadd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiType != null" >
+        BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scanCode != null" >
+        SCAN_CODE = #{record.scanCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mscCode != null" >
+        MSC_CODE = #{record.mscCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.touchIcRead != null" >
+        TOUCH_IC_READ = #{record.touchIcRead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nonTouchIcRead != null" >
+        NON_TOUCH_IC_READ = #{record.nonTouchIcRead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noCardPady != null" >
+        NO_CARD_PADY = #{record.noCardPady,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lyName != null" >
+        LY_NAME = #{record.lyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lyDate != null" >
+        LY_DATE = #{record.lyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devOpId != null" >
+        DEV_OP_ID = #{record.devOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stampDatetime != null" >
+        STAMP_DATETIME = #{record.stampDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDatetime != null" >
+        CREATE_DATETIME = #{record.createDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null" >
+        MODEL_ID = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandId != null" >
+        BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceHwVersion != null" >
+        DEVICE_HW_VERSION = #{record.deviceHwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceSwVersion != null" >
+        DEVICE_SW_VERSION = #{record.deviceSwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchantName != null" >
+        MERCHANT_NAME = #{record.merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        GROUP_ID = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_DEVICE
+    set DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      DEVICE_SN = #{record.deviceSn,jdbcType=VARCHAR},
+      PSAM_ID = #{record.psamId,jdbcType=VARCHAR},
+      MCHNT_ID = #{record.mchntId,jdbcType=VARCHAR},
+      BATCH_NO = #{record.batchNo,jdbcType=VARCHAR},
+      DEVICE_TYPE_FLAG = #{record.deviceTypeFlag,jdbcType=VARCHAR},
+      DEVICE_STATUS = #{record.deviceStatus,jdbcType=VARCHAR},
+      DEVICE_LIMIT_STATUS = #{record.deviceLimitStatus,jdbcType=VARCHAR},
+      APP_LOGIN_PWD = #{record.appLoginPwd,jdbcType=VARCHAR},
+      DEV_KEY_ALG_TYPE = #{record.devKeyAlgType,jdbcType=VARCHAR},
+      DEV_TMK_STATUS = #{record.devTmkStatus,jdbcType=VARCHAR},
+      DEV_TMK_UPDATE_DATETIME = #{record.devTmkUpdateDatetime,jdbcType=VARCHAR},
+      KEY_OP_ID = #{record.keyOpId,jdbcType=VARCHAR},
+      DEV_TMK = #{record.devTmk,jdbcType=VARCHAR},
+      DEV_TMK_CHECK = #{record.devTmkCheck,jdbcType=VARCHAR},
+      DEV_SING_IN_DATETIME = #{record.devSingInDatetime,jdbcType=VARCHAR},
+      DEV_SIGN_OUT_DATETIME = #{record.devSignOutDatetime,jdbcType=VARCHAR},
+      DEV_PIK = #{record.devPik,jdbcType=VARCHAR},
+      DEV_PIK_CHECK = #{record.devPikCheck,jdbcType=VARCHAR},
+      DEV_MAK = #{record.devMak,jdbcType=VARCHAR},
+      DEV_MAK_CHECK = #{record.devMakCheck,jdbcType=VARCHAR},
+      DEV_TK = #{record.devTk,jdbcType=VARCHAR},
+      DEV_TK_CHECK = #{record.devTkCheck,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      RADIUS = #{record.radius,jdbcType=VARCHAR},
+      VERSION = #{record.version,jdbcType=VARCHAR},
+      DEV_ONADD = #{record.devOnadd,jdbcType=VARCHAR},
+      BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      SCAN_CODE = #{record.scanCode,jdbcType=VARCHAR},
+      MSC_CODE = #{record.mscCode,jdbcType=VARCHAR},
+      TOUCH_IC_READ = #{record.touchIcRead,jdbcType=VARCHAR},
+      NON_TOUCH_IC_READ = #{record.nonTouchIcRead,jdbcType=VARCHAR},
+      NO_CARD_PADY = #{record.noCardPady,jdbcType=VARCHAR},
+      LY_NAME = #{record.lyName,jdbcType=VARCHAR},
+      LY_DATE = #{record.lyDate,jdbcType=VARCHAR},
+      DEV_OP_ID = #{record.devOpId,jdbcType=VARCHAR},
+      STAMP_DATETIME = #{record.stampDatetime,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{record.createDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      MODEL_ID = #{record.modelId,jdbcType=VARCHAR},
+      ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      DEVICE_HW_VERSION = #{record.deviceHwVersion,jdbcType=VARCHAR},
+      DEVICE_SW_VERSION = #{record.deviceSwVersion,jdbcType=VARCHAR},
+      MERCHANT_NAME = #{record.merchantName,jdbcType=VARCHAR},
+      GROUP_ID = #{record.groupId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.Device" >
+    update TBL_DEVICE
+    <set >
+      <if test="deviceSn != null" >
+        DEVICE_SN = #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="psamId != null" >
+        PSAM_ID = #{psamId,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntId != null" >
+        MCHNT_ID = #{mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeFlag != null" >
+        DEVICE_TYPE_FLAG = #{deviceTypeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null" >
+        DEVICE_STATUS = #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceLimitStatus != null" >
+        DEVICE_LIMIT_STATUS = #{deviceLimitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="appLoginPwd != null" >
+        APP_LOGIN_PWD = #{appLoginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="devKeyAlgType != null" >
+        DEV_KEY_ALG_TYPE = #{devKeyAlgType,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmkStatus != null" >
+        DEV_TMK_STATUS = #{devTmkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmkUpdateDatetime != null" >
+        DEV_TMK_UPDATE_DATETIME = #{devTmkUpdateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="keyOpId != null" >
+        KEY_OP_ID = #{keyOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmk != null" >
+        DEV_TMK = #{devTmk,jdbcType=VARCHAR},
+      </if>
+      <if test="devTmkCheck != null" >
+        DEV_TMK_CHECK = #{devTmkCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="devSingInDatetime != null" >
+        DEV_SING_IN_DATETIME = #{devSingInDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="devSignOutDatetime != null" >
+        DEV_SIGN_OUT_DATETIME = #{devSignOutDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="devPik != null" >
+        DEV_PIK = #{devPik,jdbcType=VARCHAR},
+      </if>
+      <if test="devPikCheck != null" >
+        DEV_PIK_CHECK = #{devPikCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="devMak != null" >
+        DEV_MAK = #{devMak,jdbcType=VARCHAR},
+      </if>
+      <if test="devMakCheck != null" >
+        DEV_MAK_CHECK = #{devMakCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="devTk != null" >
+        DEV_TK = #{devTk,jdbcType=VARCHAR},
+      </if>
+      <if test="devTkCheck != null" >
+        DEV_TK_CHECK = #{devTkCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="radius != null" >
+        RADIUS = #{radius,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="devOnadd != null" >
+        DEV_ONADD = #{devOnadd,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null" >
+        BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="scanCode != null" >
+        SCAN_CODE = #{scanCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mscCode != null" >
+        MSC_CODE = #{mscCode,jdbcType=VARCHAR},
+      </if>
+      <if test="touchIcRead != null" >
+        TOUCH_IC_READ = #{touchIcRead,jdbcType=VARCHAR},
+      </if>
+      <if test="nonTouchIcRead != null" >
+        NON_TOUCH_IC_READ = #{nonTouchIcRead,jdbcType=VARCHAR},
+      </if>
+      <if test="noCardPady != null" >
+        NO_CARD_PADY = #{noCardPady,jdbcType=VARCHAR},
+      </if>
+      <if test="lyName != null" >
+        LY_NAME = #{lyName,jdbcType=VARCHAR},
+      </if>
+      <if test="lyDate != null" >
+        LY_DATE = #{lyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="devOpId != null" >
+        DEV_OP_ID = #{devOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="stampDatetime != null" >
+        STAMP_DATETIME = #{stampDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        CREATE_DATETIME = #{createDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        MODEL_ID = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceHwVersion != null" >
+        DEVICE_HW_VERSION = #{deviceHwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSwVersion != null" >
+        DEVICE_SW_VERSION = #{deviceSwVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        MERCHANT_NAME = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEVICE_ID = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.Device" >
+    update TBL_DEVICE
+    set DEVICE_SN = #{deviceSn,jdbcType=VARCHAR},
+      PSAM_ID = #{psamId,jdbcType=VARCHAR},
+      MCHNT_ID = #{mchntId,jdbcType=VARCHAR},
+      BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      DEVICE_TYPE_FLAG = #{deviceTypeFlag,jdbcType=VARCHAR},
+      DEVICE_STATUS = #{deviceStatus,jdbcType=VARCHAR},
+      DEVICE_LIMIT_STATUS = #{deviceLimitStatus,jdbcType=VARCHAR},
+      APP_LOGIN_PWD = #{appLoginPwd,jdbcType=VARCHAR},
+      DEV_KEY_ALG_TYPE = #{devKeyAlgType,jdbcType=VARCHAR},
+      DEV_TMK_STATUS = #{devTmkStatus,jdbcType=VARCHAR},
+      DEV_TMK_UPDATE_DATETIME = #{devTmkUpdateDatetime,jdbcType=VARCHAR},
+      KEY_OP_ID = #{keyOpId,jdbcType=VARCHAR},
+      DEV_TMK = #{devTmk,jdbcType=VARCHAR},
+      DEV_TMK_CHECK = #{devTmkCheck,jdbcType=VARCHAR},
+      DEV_SING_IN_DATETIME = #{devSingInDatetime,jdbcType=VARCHAR},
+      DEV_SIGN_OUT_DATETIME = #{devSignOutDatetime,jdbcType=VARCHAR},
+      DEV_PIK = #{devPik,jdbcType=VARCHAR},
+      DEV_PIK_CHECK = #{devPikCheck,jdbcType=VARCHAR},
+      DEV_MAK = #{devMak,jdbcType=VARCHAR},
+      DEV_MAK_CHECK = #{devMakCheck,jdbcType=VARCHAR},
+      DEV_TK = #{devTk,jdbcType=VARCHAR},
+      DEV_TK_CHECK = #{devTkCheck,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      RADIUS = #{radius,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=VARCHAR},
+      DEV_ONADD = #{devOnadd,jdbcType=VARCHAR},
+      BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
+      SCAN_CODE = #{scanCode,jdbcType=VARCHAR},
+      MSC_CODE = #{mscCode,jdbcType=VARCHAR},
+      TOUCH_IC_READ = #{touchIcRead,jdbcType=VARCHAR},
+      NON_TOUCH_IC_READ = #{nonTouchIcRead,jdbcType=VARCHAR},
+      NO_CARD_PADY = #{noCardPady,jdbcType=VARCHAR},
+      LY_NAME = #{lyName,jdbcType=VARCHAR},
+      LY_DATE = #{lyDate,jdbcType=VARCHAR},
+      DEV_OP_ID = #{devOpId,jdbcType=VARCHAR},
+      STAMP_DATETIME = #{stampDatetime,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      MODEL_ID = #{modelId,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      DEVICE_HW_VERSION = #{deviceHwVersion,jdbcType=VARCHAR},
+      DEVICE_SW_VERSION = #{deviceSwVersion,jdbcType=VARCHAR},
+      MERCHANT_NAME = #{merchantName,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR}
+    where DEVICE_ID = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <select id="queryForList" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.Device">
+    SELECT td.*,
+    tm.MODEL_NAME,
+    tm.MODEL_TYPE_ID,
+    tb.BRAND_NAME,
+    mer.MCHNT_NAME
+    FROM syd_tms.TBL_DEVICE td
+    LEFT JOIN syd_tms.TBL_DEVICE_MODEL tm
+    ON tm.MODEL_ID = td.MODEL_ID
+    LEFT JOIN syd_tms.TBL_DEVICE_BRAND tb
+    ON tb.BRAND_ID = td.BRAND_ID
+    LEFT JOIN TBL_MERCHANT mer ON mer.MCHNT_ID = td.MCHNT_ID
+    WHERE td.DEVICE_STATUS != 3
+    <if test="brandId != null and brandId != ''" >
+      and td.BRAND_ID = #{brandId,jdbcType=VARCHAR}
+    </if>
+    <if test="modelName != null and modelName != ''" >
+      and tm.MODEL_NAME like '%${modelName}%'
+    </if>
+    <if test="deviceId != null and deviceId != ''" >
+      and td.DEVICE_ID like '%${deviceId}%'
+    </if>
+    <if test="deviceSn != null and deviceSn != ''" >
+      and td.DEVICE_ID like '%${deviceId}%'
+    </if>
+    ORDER BY td.DEVICE_ID ASC
+  </select>
+  <select id="showNoMerchantDevice" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.Device">
+    SELECT td.*,
+    tm.MODEL_NAME,
+    tb.BRAND_NAME
+    FROM syd_tms.TBL_DEVICE td
+    LEFT JOIN syd_tms.TBL_DEVICE_MODEL tm
+    ON tm.MODEL_ID = td.MODEL_ID
+    LEFT JOIN syd_tms.TBL_DEVICE_BRAND tb
+    ON tb.BRAND_ID = td.BRAND_ID
+    WHERE td.DEVICE_STATUS !='3'
+    AND td.MCHNT_ID is NULL
+  </select>
+  <select id="findByMerchantId" resultMap="BaseResultMap" parameterType="Merchant">
+    SELECT td.*,
+    tm.MODEL_NAME,
+    tb.BRAND_NAME,
+    tme.MCHNT_NAME
+    FROM syd_tms.TBL_DEVICE td
+    LEFT JOIN syd_tms.TBL_DEVICE_MODEL tm
+    ON tm.MODEL_ID = td.MODEL_ID
+    LEFT JOIN syd_tms.TBL_DEVICE_BRAND tb
+    ON tb.BRAND_ID = td.BRAND_ID
+    LEFT JOIN TBL_MERCHANT tme on tme.MCHNT_ID = td.MCHNT_ID
+    WHERE tme.MCHNT_ID = #{mchntId}
+    and td.DEVICE_STATUS != '3'
+  </select>
+  <update id="emptyGroupIdByGroup" parameterType="java.lang.String" >
+    update TBL_DEVICE set GROUP_ID = null where GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

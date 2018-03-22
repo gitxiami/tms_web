@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.DeviceAppParaMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.DeviceAppPara" >
+    <id column="DEVICE_SN" property="deviceSn" jdbcType="VARCHAR" />
+    <id column="PARA_VER" property="paraVer" jdbcType="VARCHAR" />
+    <result column="SERVER_PARA" property="serverPara" jdbcType="VARCHAR" />
+    <result column="SERVER_PARA_BAK1" property="serverParaBak1" jdbcType="VARCHAR" />
+    <result column="SERVER_PARA_BAK2" property="serverParaBak2" jdbcType="VARCHAR" />
+    <result column="MCHNT_ID" property="mchntId" jdbcType="VARCHAR" />
+    <result column="DEVICE_ID" property="deviceId" jdbcType="VARCHAR" />
+    <result column="PARA_ID" property="paraId" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DEVICE_SN, PARA_VER, SERVER_PARA, SERVER_PARA_BAK1, SERVER_PARA_BAK2, MCHNT_ID, DEVICE_ID, 
+    PARA_ID, CREATED_DATETIME, UPDATE_DATETIME, BAK1, BAK2, BAK3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.DeviceAppParaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE_APP_PARA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.DeviceAppParaKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE_APP_PARA
+    where DEVICE_SN = #{deviceSn,jdbcType=VARCHAR}
+      and PARA_VER = #{paraVer,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sunyard.tms.entity.DeviceAppParaKey" >
+    delete from TBL_DEVICE_APP_PARA
+    where DEVICE_SN = #{deviceSn,jdbcType=VARCHAR}
+      and PARA_VER = #{paraVer,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.DeviceAppParaExample" >
+    delete from TBL_DEVICE_APP_PARA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.DeviceAppPara" >
+    insert into TBL_DEVICE_APP_PARA (DEVICE_SN, PARA_VER, SERVER_PARA, 
+      SERVER_PARA_BAK1, SERVER_PARA_BAK2, MCHNT_ID, 
+      DEVICE_ID, PARA_ID, CREATED_DATETIME, 
+      UPDATE_DATETIME, BAK1, BAK2, 
+      BAK3)
+    values (#{deviceSn,jdbcType=VARCHAR}, #{paraVer,jdbcType=VARCHAR}, #{serverPara,jdbcType=VARCHAR}, 
+      #{serverParaBak1,jdbcType=VARCHAR}, #{serverParaBak2,jdbcType=VARCHAR}, #{mchntId,jdbcType=VARCHAR}, 
+      #{deviceId,jdbcType=VARCHAR}, #{paraId,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, 
+      #{bak3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.DeviceAppPara" >
+    insert into TBL_DEVICE_APP_PARA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceSn != null" >
+        DEVICE_SN,
+      </if>
+      <if test="paraVer != null" >
+        PARA_VER,
+      </if>
+      <if test="serverPara != null" >
+        SERVER_PARA,
+      </if>
+      <if test="serverParaBak1 != null" >
+        SERVER_PARA_BAK1,
+      </if>
+      <if test="serverParaBak2 != null" >
+        SERVER_PARA_BAK2,
+      </if>
+      <if test="mchntId != null" >
+        MCHNT_ID,
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="paraId != null" >
+        PARA_ID,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceSn != null" >
+        #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="paraVer != null" >
+        #{paraVer,jdbcType=VARCHAR},
+      </if>
+      <if test="serverPara != null" >
+        #{serverPara,jdbcType=VARCHAR},
+      </if>
+      <if test="serverParaBak1 != null" >
+        #{serverParaBak1,jdbcType=VARCHAR},
+      </if>
+      <if test="serverParaBak2 != null" >
+        #{serverParaBak2,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntId != null" >
+        #{mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="paraId != null" >
+        #{paraId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.DeviceAppParaExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_DEVICE_APP_PARA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_DEVICE_APP_PARA
+    <set >
+      <if test="record.deviceSn != null" >
+        DEVICE_SN = #{record.deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paraVer != null" >
+        PARA_VER = #{record.paraVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverPara != null" >
+        SERVER_PARA = #{record.serverPara,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverParaBak1 != null" >
+        SERVER_PARA_BAK1 = #{record.serverParaBak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverParaBak2 != null" >
+        SERVER_PARA_BAK2 = #{record.serverParaBak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntId != null" >
+        MCHNT_ID = #{record.mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceId != null" >
+        DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paraId != null" >
+        PARA_ID = #{record.paraId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_DEVICE_APP_PARA
+    set DEVICE_SN = #{record.deviceSn,jdbcType=VARCHAR},
+      PARA_VER = #{record.paraVer,jdbcType=VARCHAR},
+      SERVER_PARA = #{record.serverPara,jdbcType=VARCHAR},
+      SERVER_PARA_BAK1 = #{record.serverParaBak1,jdbcType=VARCHAR},
+      SERVER_PARA_BAK2 = #{record.serverParaBak2,jdbcType=VARCHAR},
+      MCHNT_ID = #{record.mchntId,jdbcType=VARCHAR},
+      DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      PARA_ID = #{record.paraId,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.DeviceAppPara" >
+    update TBL_DEVICE_APP_PARA
+    <set >
+      <if test="serverPara != null" >
+        SERVER_PARA = #{serverPara,jdbcType=VARCHAR},
+      </if>
+      <if test="serverParaBak1 != null" >
+        SERVER_PARA_BAK1 = #{serverParaBak1,jdbcType=VARCHAR},
+      </if>
+      <if test="serverParaBak2 != null" >
+        SERVER_PARA_BAK2 = #{serverParaBak2,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntId != null" >
+        MCHNT_ID = #{mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="paraId != null" >
+        PARA_ID = #{paraId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEVICE_SN = #{deviceSn,jdbcType=VARCHAR}
+      and PARA_VER = #{paraVer,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.DeviceAppPara" >
+    update TBL_DEVICE_APP_PARA
+    set SERVER_PARA = #{serverPara,jdbcType=VARCHAR},
+      SERVER_PARA_BAK1 = #{serverParaBak1,jdbcType=VARCHAR},
+      SERVER_PARA_BAK2 = #{serverParaBak2,jdbcType=VARCHAR},
+      MCHNT_ID = #{mchntId,jdbcType=VARCHAR},
+      DEVICE_ID = #{deviceId,jdbcType=VARCHAR},
+      PARA_ID = #{paraId,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR}
+    where DEVICE_SN = #{deviceSn,jdbcType=VARCHAR}
+      and PARA_VER = #{paraVer,jdbcType=VARCHAR}
+  </update>
+</mapper>

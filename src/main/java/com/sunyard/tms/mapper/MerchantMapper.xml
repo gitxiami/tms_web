@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.MerchantMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.Merchant" >
+    <id column="MCHNT_ID" property="mchntId" jdbcType="VARCHAR" />
+    <result column="MCHNT_USERNAME" property="mchntUsername" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="DVP_BY" property="dvpBy" jdbcType="VARCHAR" />
+    <result column="MCHNT_SVC_TP" property="mchntSvcTp" jdbcType="VARCHAR" />
+    <result column="AGR_MCHNT_CD" property="agrMchntCd" jdbcType="VARCHAR" />
+    <result column="AGR_MCHNT_STATUS" property="agrMchntStatus" jdbcType="VARCHAR" />
+    <result column="MCC_CD_18" property="mccCd18" jdbcType="VARCHAR" />
+    <result column="BUSINESS_SCOPE" property="businessScope" jdbcType="VARCHAR" />
+    <result column="MCHNT_NAME" property="mchntName" jdbcType="VARCHAR" />
+    <result column="MCHNT_ABBR" property="mchntAbbr" jdbcType="VARCHAR" />
+    <result column="NET_MCHNT_SVC_TP" property="netMchntSvcTp" jdbcType="VARCHAR" />
+    <result column="LIC_NO" property="licNo" jdbcType="VARCHAR" />
+    <result column="BUSS_ADDR" property="bussAddr" jdbcType="VARCHAR" />
+    <result column="ARTIF_NM" property="artifNm" jdbcType="VARCHAR" />
+    <result column="ARTIF_CERTIF_TP" property="artifCertifTp" jdbcType="VARCHAR" />
+    <result column="ARTIF_CERTIF_ID" property="artifCertifId" jdbcType="VARCHAR" />
+    <result column="REG_ADDR" property="regAddr" jdbcType="VARCHAR" />
+    <result column="SETTLE_NO" property="settleNo" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR" />
+    <result column="SETTLE_BANK" property="settleBank" jdbcType="VARCHAR" />
+    <result column="SETTLE_BRANCH_CODE" property="settleBranchCode" jdbcType="VARCHAR" />
+    <result column="T0_SCOPE" property="t0Scope" jdbcType="VARCHAR" />
+    <result column="ETPS_ATTR" property="etpsAttr" jdbcType="VARCHAR" />
+    <result column="COMM_ADDR" property="commAddr" jdbcType="VARCHAR" />
+    <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="MOBILE_NO" property="mobileNo" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="VARCHAR" />
+    <result column="LATITUDE" property="latitude" jdbcType="VARCHAR" />
+    <result column="RADIUS" property="radius" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="MCHNT_LIMIT_STATUS" property="mchntLimitStatus" jdbcType="VARCHAR" />
+    <result column="TRANS_STATUS" property="transStatus" jdbcType="VARCHAR" />
+    <result column="MCC_APPL_RULE" property="mccApplRule" jdbcType="VARCHAR" />
+    <result column="MCHNT_FEE_TYPE" property="mchntFeeType" jdbcType="VARCHAR" />
+    <result column="OP_ID" property="opId" jdbcType="VARCHAR" />
+    <result column="CREATE_DATETIME" property="createDatetime" jdbcType="VARCHAR" />
+    <result column="REGISTER_DATETIME" property="registerDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MCHNT_ID, MCHNT_USERNAME, ORG_ID, ORG_NAME, DVP_BY, MCHNT_SVC_TP, AGR_MCHNT_CD, AGR_MCHNT_STATUS, 
+    MCC_CD_18, BUSINESS_SCOPE, MCHNT_NAME, MCHNT_ABBR, NET_MCHNT_SVC_TP, LIC_NO, BUSS_ADDR, 
+    ARTIF_NM, ARTIF_CERTIF_TP, ARTIF_CERTIF_ID, REG_ADDR, SETTLE_NO, ACCOUNT_NAME, SETTLE_BANK, 
+    SETTLE_BRANCH_CODE, T0_SCOPE, ETPS_ATTR, COMM_ADDR, PHONE_NO, MOBILE_NO, LONGITUDE, 
+    LATITUDE, RADIUS, ROLE_ID, STATUS, MCHNT_LIMIT_STATUS, TRANS_STATUS, MCC_APPL_RULE, 
+    MCHNT_FEE_TYPE, OP_ID, CREATE_DATETIME, REGISTER_DATETIME, UPDATE_DATETIME, BAK1, 
+    BAK2, BAK3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.MerchantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_MERCHANT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_MERCHANT
+    where MCHNT_ID = #{mchntId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_MERCHANT
+    where MCHNT_ID = #{mchntId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.MerchantExample" >
+    delete from TBL_MERCHANT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.Merchant" >
+    insert into TBL_MERCHANT (MCHNT_ID, MCHNT_USERNAME, ORG_ID, 
+      ORG_NAME, DVP_BY, MCHNT_SVC_TP, 
+      AGR_MCHNT_CD, AGR_MCHNT_STATUS, MCC_CD_18, 
+      BUSINESS_SCOPE, MCHNT_NAME, MCHNT_ABBR, 
+      NET_MCHNT_SVC_TP, LIC_NO, BUSS_ADDR, 
+      ARTIF_NM, ARTIF_CERTIF_TP, ARTIF_CERTIF_ID, 
+      REG_ADDR, SETTLE_NO, ACCOUNT_NAME, 
+      SETTLE_BANK, SETTLE_BRANCH_CODE, T0_SCOPE, 
+      ETPS_ATTR, COMM_ADDR, PHONE_NO, 
+      MOBILE_NO, LONGITUDE, LATITUDE, 
+      RADIUS, ROLE_ID, STATUS, 
+      MCHNT_LIMIT_STATUS, TRANS_STATUS, MCC_APPL_RULE, 
+      MCHNT_FEE_TYPE, OP_ID, CREATE_DATETIME, 
+      REGISTER_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3)
+    values (#{mchntId,jdbcType=VARCHAR}, #{mchntUsername,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{dvpBy,jdbcType=VARCHAR}, #{mchntSvcTp,jdbcType=VARCHAR}, 
+      #{agrMchntCd,jdbcType=VARCHAR}, #{agrMchntStatus,jdbcType=VARCHAR}, #{mccCd18,jdbcType=VARCHAR}, 
+      #{businessScope,jdbcType=VARCHAR}, #{mchntName,jdbcType=VARCHAR}, #{mchntAbbr,jdbcType=VARCHAR}, 
+      #{netMchntSvcTp,jdbcType=VARCHAR}, #{licNo,jdbcType=VARCHAR}, #{bussAddr,jdbcType=VARCHAR}, 
+      #{artifNm,jdbcType=VARCHAR}, #{artifCertifTp,jdbcType=VARCHAR}, #{artifCertifId,jdbcType=VARCHAR}, 
+      #{regAddr,jdbcType=VARCHAR}, #{settleNo,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, 
+      #{settleBank,jdbcType=VARCHAR}, #{settleBranchCode,jdbcType=VARCHAR}, #{t0Scope,jdbcType=VARCHAR}, 
+      #{etpsAttr,jdbcType=VARCHAR}, #{commAddr,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, 
+      #{mobileNo,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{radius,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{mchntLimitStatus,jdbcType=VARCHAR}, #{transStatus,jdbcType=VARCHAR}, #{mccApplRule,jdbcType=VARCHAR}, 
+      #{mchntFeeType,jdbcType=VARCHAR}, #{opId,jdbcType=VARCHAR}, #{createDatetime,jdbcType=VARCHAR}, 
+      #{registerDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.Merchant" >
+    insert into TBL_MERCHANT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mchntId != null" >
+        MCHNT_ID,
+      </if>
+      <if test="mchntUsername != null" >
+        MCHNT_USERNAME,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="dvpBy != null" >
+        DVP_BY,
+      </if>
+      <if test="mchntSvcTp != null" >
+        MCHNT_SVC_TP,
+      </if>
+      <if test="agrMchntCd != null" >
+        AGR_MCHNT_CD,
+      </if>
+      <if test="agrMchntStatus != null" >
+        AGR_MCHNT_STATUS,
+      </if>
+      <if test="mccCd18 != null" >
+        MCC_CD_18,
+      </if>
+      <if test="businessScope != null" >
+        BUSINESS_SCOPE,
+      </if>
+      <if test="mchntName != null" >
+        MCHNT_NAME,
+      </if>
+      <if test="mchntAbbr != null" >
+        MCHNT_ABBR,
+      </if>
+      <if test="netMchntSvcTp != null" >
+        NET_MCHNT_SVC_TP,
+      </if>
+      <if test="licNo != null" >
+        LIC_NO,
+      </if>
+      <if test="bussAddr != null" >
+        BUSS_ADDR,
+      </if>
+      <if test="artifNm != null" >
+        ARTIF_NM,
+      </if>
+      <if test="artifCertifTp != null" >
+        ARTIF_CERTIF_TP,
+      </if>
+      <if test="artifCertifId != null" >
+        ARTIF_CERTIF_ID,
+      </if>
+      <if test="regAddr != null" >
+        REG_ADDR,
+      </if>
+      <if test="settleNo != null" >
+        SETTLE_NO,
+      </if>
+      <if test="accountName != null" >
+        ACCOUNT_NAME,
+      </if>
+      <if test="settleBank != null" >
+        SETTLE_BANK,
+      </if>
+      <if test="settleBranchCode != null" >
+        SETTLE_BRANCH_CODE,
+      </if>
+      <if test="t0Scope != null" >
+        T0_SCOPE,
+      </if>
+      <if test="etpsAttr != null" >
+        ETPS_ATTR,
+      </if>
+      <if test="commAddr != null" >
+        COMM_ADDR,
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO,
+      </if>
+      <if test="mobileNo != null" >
+        MOBILE_NO,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="radius != null" >
+        RADIUS,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="mchntLimitStatus != null" >
+        MCHNT_LIMIT_STATUS,
+      </if>
+      <if test="transStatus != null" >
+        TRANS_STATUS,
+      </if>
+      <if test="mccApplRule != null" >
+        MCC_APPL_RULE,
+      </if>
+      <if test="mchntFeeType != null" >
+        MCHNT_FEE_TYPE,
+      </if>
+      <if test="opId != null" >
+        OP_ID,
+      </if>
+      <if test="createDatetime != null" >
+        CREATE_DATETIME,
+      </if>
+      <if test="registerDatetime != null" >
+        REGISTER_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mchntId != null" >
+        #{mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntUsername != null" >
+        #{mchntUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="dvpBy != null" >
+        #{dvpBy,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntSvcTp != null" >
+        #{mchntSvcTp,jdbcType=VARCHAR},
+      </if>
+      <if test="agrMchntCd != null" >
+        #{agrMchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="agrMchntStatus != null" >
+        #{agrMchntStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mccCd18 != null" >
+        #{mccCd18,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null" >
+        #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntName != null" >
+        #{mchntName,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntAbbr != null" >
+        #{mchntAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="netMchntSvcTp != null" >
+        #{netMchntSvcTp,jdbcType=VARCHAR},
+      </if>
+      <if test="licNo != null" >
+        #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bussAddr != null" >
+        #{bussAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="artifNm != null" >
+        #{artifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="artifCertifTp != null" >
+        #{artifCertifTp,jdbcType=VARCHAR},
+      </if>
+      <if test="artifCertifId != null" >
+        #{artifCertifId,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddr != null" >
+        #{regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="settleNo != null" >
+        #{settleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="settleBank != null" >
+        #{settleBank,jdbcType=VARCHAR},
+      </if>
+      <if test="settleBranchCode != null" >
+        #{settleBranchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="t0Scope != null" >
+        #{t0Scope,jdbcType=VARCHAR},
+      </if>
+      <if test="etpsAttr != null" >
+        #{etpsAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="commAddr != null" >
+        #{commAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="radius != null" >
+        #{radius,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntLimitStatus != null" >
+        #{mchntLimitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transStatus != null" >
+        #{transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mccApplRule != null" >
+        #{mccApplRule,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntFeeType != null" >
+        #{mchntFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDatetime != null" >
+        #{registerDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.MerchantExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_MERCHANT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_MERCHANT
+    <set >
+      <if test="record.mchntId != null" >
+        MCHNT_ID = #{record.mchntId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntUsername != null" >
+        MCHNT_USERNAME = #{record.mchntUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dvpBy != null" >
+        DVP_BY = #{record.dvpBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntSvcTp != null" >
+        MCHNT_SVC_TP = #{record.mchntSvcTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agrMchntCd != null" >
+        AGR_MCHNT_CD = #{record.agrMchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agrMchntStatus != null" >
+        AGR_MCHNT_STATUS = #{record.agrMchntStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mccCd18 != null" >
+        MCC_CD_18 = #{record.mccCd18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessScope != null" >
+        BUSINESS_SCOPE = #{record.businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntName != null" >
+        MCHNT_NAME = #{record.mchntName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntAbbr != null" >
+        MCHNT_ABBR = #{record.mchntAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netMchntSvcTp != null" >
+        NET_MCHNT_SVC_TP = #{record.netMchntSvcTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licNo != null" >
+        LIC_NO = #{record.licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bussAddr != null" >
+        BUSS_ADDR = #{record.bussAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artifNm != null" >
+        ARTIF_NM = #{record.artifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artifCertifTp != null" >
+        ARTIF_CERTIF_TP = #{record.artifCertifTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artifCertifId != null" >
+        ARTIF_CERTIF_ID = #{record.artifCertifId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regAddr != null" >
+        REG_ADDR = #{record.regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleNo != null" >
+        SETTLE_NO = #{record.settleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountName != null" >
+        ACCOUNT_NAME = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleBank != null" >
+        SETTLE_BANK = #{record.settleBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleBranchCode != null" >
+        SETTLE_BRANCH_CODE = #{record.settleBranchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.t0Scope != null" >
+        T0_SCOPE = #{record.t0Scope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.etpsAttr != null" >
+        ETPS_ATTR = #{record.etpsAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commAddr != null" >
+        COMM_ADDR = #{record.commAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNo != null" >
+        PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileNo != null" >
+        MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radius != null" >
+        RADIUS = #{record.radius,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntLimitStatus != null" >
+        MCHNT_LIMIT_STATUS = #{record.mchntLimitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transStatus != null" >
+        TRANS_STATUS = #{record.transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mccApplRule != null" >
+        MCC_APPL_RULE = #{record.mccApplRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntFeeType != null" >
+        MCHNT_FEE_TYPE = #{record.mchntFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opId != null" >
+        OP_ID = #{record.opId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDatetime != null" >
+        CREATE_DATETIME = #{record.createDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerDatetime != null" >
+        REGISTER_DATETIME = #{record.registerDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_MERCHANT
+    set MCHNT_ID = #{record.mchntId,jdbcType=VARCHAR},
+      MCHNT_USERNAME = #{record.mchntUsername,jdbcType=VARCHAR},
+      ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      DVP_BY = #{record.dvpBy,jdbcType=VARCHAR},
+      MCHNT_SVC_TP = #{record.mchntSvcTp,jdbcType=VARCHAR},
+      AGR_MCHNT_CD = #{record.agrMchntCd,jdbcType=VARCHAR},
+      AGR_MCHNT_STATUS = #{record.agrMchntStatus,jdbcType=VARCHAR},
+      MCC_CD_18 = #{record.mccCd18,jdbcType=VARCHAR},
+      BUSINESS_SCOPE = #{record.businessScope,jdbcType=VARCHAR},
+      MCHNT_NAME = #{record.mchntName,jdbcType=VARCHAR},
+      MCHNT_ABBR = #{record.mchntAbbr,jdbcType=VARCHAR},
+      NET_MCHNT_SVC_TP = #{record.netMchntSvcTp,jdbcType=VARCHAR},
+      LIC_NO = #{record.licNo,jdbcType=VARCHAR},
+      BUSS_ADDR = #{record.bussAddr,jdbcType=VARCHAR},
+      ARTIF_NM = #{record.artifNm,jdbcType=VARCHAR},
+      ARTIF_CERTIF_TP = #{record.artifCertifTp,jdbcType=VARCHAR},
+      ARTIF_CERTIF_ID = #{record.artifCertifId,jdbcType=VARCHAR},
+      REG_ADDR = #{record.regAddr,jdbcType=VARCHAR},
+      SETTLE_NO = #{record.settleNo,jdbcType=VARCHAR},
+      ACCOUNT_NAME = #{record.accountName,jdbcType=VARCHAR},
+      SETTLE_BANK = #{record.settleBank,jdbcType=VARCHAR},
+      SETTLE_BRANCH_CODE = #{record.settleBranchCode,jdbcType=VARCHAR},
+      T0_SCOPE = #{record.t0Scope,jdbcType=VARCHAR},
+      ETPS_ATTR = #{record.etpsAttr,jdbcType=VARCHAR},
+      COMM_ADDR = #{record.commAddr,jdbcType=VARCHAR},
+      PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR},
+      MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      RADIUS = #{record.radius,jdbcType=VARCHAR},
+      ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      MCHNT_LIMIT_STATUS = #{record.mchntLimitStatus,jdbcType=VARCHAR},
+      TRANS_STATUS = #{record.transStatus,jdbcType=VARCHAR},
+      MCC_APPL_RULE = #{record.mccApplRule,jdbcType=VARCHAR},
+      MCHNT_FEE_TYPE = #{record.mchntFeeType,jdbcType=VARCHAR},
+      OP_ID = #{record.opId,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{record.createDatetime,jdbcType=VARCHAR},
+      REGISTER_DATETIME = #{record.registerDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.Merchant" >
+    update TBL_MERCHANT
+    <set >
+      <if test="mchntUsername != null" >
+        MCHNT_USERNAME = #{mchntUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="dvpBy != null" >
+        DVP_BY = #{dvpBy,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntSvcTp != null" >
+        MCHNT_SVC_TP = #{mchntSvcTp,jdbcType=VARCHAR},
+      </if>
+      <if test="agrMchntCd != null" >
+        AGR_MCHNT_CD = #{agrMchntCd,jdbcType=VARCHAR},
+      </if>
+      <if test="agrMchntStatus != null" >
+        AGR_MCHNT_STATUS = #{agrMchntStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mccCd18 != null" >
+        MCC_CD_18 = #{mccCd18,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null" >
+        BUSINESS_SCOPE = #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntName != null" >
+        MCHNT_NAME = #{mchntName,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntAbbr != null" >
+        MCHNT_ABBR = #{mchntAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="netMchntSvcTp != null" >
+        NET_MCHNT_SVC_TP = #{netMchntSvcTp,jdbcType=VARCHAR},
+      </if>
+      <if test="licNo != null" >
+        LIC_NO = #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bussAddr != null" >
+        BUSS_ADDR = #{bussAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="artifNm != null" >
+        ARTIF_NM = #{artifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="artifCertifTp != null" >
+        ARTIF_CERTIF_TP = #{artifCertifTp,jdbcType=VARCHAR},
+      </if>
+      <if test="artifCertifId != null" >
+        ARTIF_CERTIF_ID = #{artifCertifId,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddr != null" >
+        REG_ADDR = #{regAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="settleNo != null" >
+        SETTLE_NO = #{settleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="settleBank != null" >
+        SETTLE_BANK = #{settleBank,jdbcType=VARCHAR},
+      </if>
+      <if test="settleBranchCode != null" >
+        SETTLE_BRANCH_CODE = #{settleBranchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="t0Scope != null" >
+        T0_SCOPE = #{t0Scope,jdbcType=VARCHAR},
+      </if>
+      <if test="etpsAttr != null" >
+        ETPS_ATTR = #{etpsAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="commAddr != null" >
+        COMM_ADDR = #{commAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="radius != null" >
+        RADIUS = #{radius,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntLimitStatus != null" >
+        MCHNT_LIMIT_STATUS = #{mchntLimitStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transStatus != null" >
+        TRANS_STATUS = #{transStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mccApplRule != null" >
+        MCC_APPL_RULE = #{mccApplRule,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntFeeType != null" >
+        MCHNT_FEE_TYPE = #{mchntFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        OP_ID = #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        CREATE_DATETIME = #{createDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDatetime != null" >
+        REGISTER_DATETIME = #{registerDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MCHNT_ID = #{mchntId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.Merchant" >
+    update TBL_MERCHANT
+    set MCHNT_USERNAME = #{mchntUsername,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      DVP_BY = #{dvpBy,jdbcType=VARCHAR},
+      MCHNT_SVC_TP = #{mchntSvcTp,jdbcType=VARCHAR},
+      AGR_MCHNT_CD = #{agrMchntCd,jdbcType=VARCHAR},
+      AGR_MCHNT_STATUS = #{agrMchntStatus,jdbcType=VARCHAR},
+      MCC_CD_18 = #{mccCd18,jdbcType=VARCHAR},
+      BUSINESS_SCOPE = #{businessScope,jdbcType=VARCHAR},
+      MCHNT_NAME = #{mchntName,jdbcType=VARCHAR},
+      MCHNT_ABBR = #{mchntAbbr,jdbcType=VARCHAR},
+      NET_MCHNT_SVC_TP = #{netMchntSvcTp,jdbcType=VARCHAR},
+      LIC_NO = #{licNo,jdbcType=VARCHAR},
+      BUSS_ADDR = #{bussAddr,jdbcType=VARCHAR},
+      ARTIF_NM = #{artifNm,jdbcType=VARCHAR},
+      ARTIF_CERTIF_TP = #{artifCertifTp,jdbcType=VARCHAR},
+      ARTIF_CERTIF_ID = #{artifCertifId,jdbcType=VARCHAR},
+      REG_ADDR = #{regAddr,jdbcType=VARCHAR},
+      SETTLE_NO = #{settleNo,jdbcType=VARCHAR},
+      ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+      SETTLE_BANK = #{settleBank,jdbcType=VARCHAR},
+      SETTLE_BRANCH_CODE = #{settleBranchCode,jdbcType=VARCHAR},
+      T0_SCOPE = #{t0Scope,jdbcType=VARCHAR},
+      ETPS_ATTR = #{etpsAttr,jdbcType=VARCHAR},
+      COMM_ADDR = #{commAddr,jdbcType=VARCHAR},
+      PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      RADIUS = #{radius,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      MCHNT_LIMIT_STATUS = #{mchntLimitStatus,jdbcType=VARCHAR},
+      TRANS_STATUS = #{transStatus,jdbcType=VARCHAR},
+      MCC_APPL_RULE = #{mccApplRule,jdbcType=VARCHAR},
+      MCHNT_FEE_TYPE = #{mchntFeeType,jdbcType=VARCHAR},
+      OP_ID = #{opId,jdbcType=VARCHAR},
+      CREATE_DATETIME = #{createDatetime,jdbcType=VARCHAR},
+      REGISTER_DATETIME = #{registerDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR}
+    where MCHNT_ID = #{mchntId,jdbcType=VARCHAR}
+  </update>
+</mapper>

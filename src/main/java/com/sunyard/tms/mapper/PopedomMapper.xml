@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.PopedomMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.Popedom" >
+    <id column="POPEDOM_ID" property="popedomId" jdbcType="VARCHAR" />
+    <result column="POPEDOM_NAME" property="popedomName" jdbcType="VARCHAR" />
+    <result column="POPEDOM_ACTION" property="popedomAction" jdbcType="VARCHAR" />
+    <result column="POPEDOM_TYPE" property="popedomType" jdbcType="VARCHAR" />
+    <result column="POPEDOM_REMARK" property="popedomRemark" jdbcType="VARCHAR" />
+    <result column="POPEDOM_PID" property="popedomPid" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+    <result column="POPEDOM_LINK" property="popedomLink" jdbcType="VARCHAR" />
+    <result column="POPEDOM_ICONCLS" property="popedomIconcls" jdbcType="VARCHAR" />
+    <result column="POPEDOM_ORIGIN" property="popedomOrigin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    POPEDOM_ID, POPEDOM_NAME, POPEDOM_ACTION, POPEDOM_TYPE, POPEDOM_REMARK, POPEDOM_PID, 
+    BAK1, BAK2, BAK3, POPEDOM_LINK, POPEDOM_ICONCLS, POPEDOM_ORIGIN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.PopedomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_POPEDOM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_POPEDOM
+    where POPEDOM_ID = #{popedomId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_POPEDOM
+    where POPEDOM_ID = #{popedomId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.PopedomExample" >
+    delete from TBL_POPEDOM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.Popedom" >
+    insert into TBL_POPEDOM (POPEDOM_ID, POPEDOM_NAME, POPEDOM_ACTION, 
+      POPEDOM_TYPE, POPEDOM_REMARK, POPEDOM_PID, 
+      BAK1, BAK2, BAK3, POPEDOM_LINK, 
+      POPEDOM_ICONCLS, POPEDOM_ORIGIN)
+    values (#{popedomId,jdbcType=VARCHAR}, #{popedomName,jdbcType=VARCHAR}, #{popedomAction,jdbcType=VARCHAR}, 
+      #{popedomType,jdbcType=VARCHAR}, #{popedomRemark,jdbcType=VARCHAR}, #{popedomPid,jdbcType=VARCHAR}, 
+      #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR}, #{popedomLink,jdbcType=VARCHAR}, 
+      #{popedomIconcls,jdbcType=VARCHAR}, #{popedomOrigin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.Popedom" >
+    insert into TBL_POPEDOM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="popedomId != null" >
+        POPEDOM_ID,
+      </if>
+      <if test="popedomName != null" >
+        POPEDOM_NAME,
+      </if>
+      <if test="popedomAction != null" >
+        POPEDOM_ACTION,
+      </if>
+      <if test="popedomType != null" >
+        POPEDOM_TYPE,
+      </if>
+      <if test="popedomRemark != null" >
+        POPEDOM_REMARK,
+      </if>
+      <if test="popedomPid != null" >
+        POPEDOM_PID,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+      <if test="popedomLink != null" >
+        POPEDOM_LINK,
+      </if>
+      <if test="popedomIconcls != null" >
+        POPEDOM_ICONCLS,
+      </if>
+      <if test="popedomOrigin != null" >
+        POPEDOM_ORIGIN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="popedomId != null" >
+        #{popedomId,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomName != null" >
+        #{popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomAction != null" >
+        #{popedomAction,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomType != null" >
+        #{popedomType,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomRemark != null" >
+        #{popedomRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomPid != null" >
+        #{popedomPid,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomLink != null" >
+        #{popedomLink,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomIconcls != null" >
+        #{popedomIconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomOrigin != null" >
+        #{popedomOrigin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.PopedomExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_POPEDOM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_POPEDOM
+    <set >
+      <if test="record.popedomId != null" >
+        POPEDOM_ID = #{record.popedomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomName != null" >
+        POPEDOM_NAME = #{record.popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomAction != null" >
+        POPEDOM_ACTION = #{record.popedomAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomType != null" >
+        POPEDOM_TYPE = #{record.popedomType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomRemark != null" >
+        POPEDOM_REMARK = #{record.popedomRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomPid != null" >
+        POPEDOM_PID = #{record.popedomPid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomLink != null" >
+        POPEDOM_LINK = #{record.popedomLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomIconcls != null" >
+        POPEDOM_ICONCLS = #{record.popedomIconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popedomOrigin != null" >
+        POPEDOM_ORIGIN = #{record.popedomOrigin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_POPEDOM
+    set POPEDOM_ID = #{record.popedomId,jdbcType=VARCHAR},
+      POPEDOM_NAME = #{record.popedomName,jdbcType=VARCHAR},
+      POPEDOM_ACTION = #{record.popedomAction,jdbcType=VARCHAR},
+      POPEDOM_TYPE = #{record.popedomType,jdbcType=VARCHAR},
+      POPEDOM_REMARK = #{record.popedomRemark,jdbcType=VARCHAR},
+      POPEDOM_PID = #{record.popedomPid,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      POPEDOM_LINK = #{record.popedomLink,jdbcType=VARCHAR},
+      POPEDOM_ICONCLS = #{record.popedomIconcls,jdbcType=VARCHAR},
+      POPEDOM_ORIGIN = #{record.popedomOrigin,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.Popedom" >
+    update TBL_POPEDOM
+    <set >
+      <if test="popedomName != null" >
+        POPEDOM_NAME = #{popedomName,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomAction != null" >
+        POPEDOM_ACTION = #{popedomAction,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomType != null" >
+        POPEDOM_TYPE = #{popedomType,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomRemark != null" >
+        POPEDOM_REMARK = #{popedomRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomPid != null" >
+        POPEDOM_PID = #{popedomPid,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomLink != null" >
+        POPEDOM_LINK = #{popedomLink,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomIconcls != null" >
+        POPEDOM_ICONCLS = #{popedomIconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="popedomOrigin != null" >
+        POPEDOM_ORIGIN = #{popedomOrigin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where POPEDOM_ID = #{popedomId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.Popedom" >
+    update TBL_POPEDOM
+    set POPEDOM_NAME = #{popedomName,jdbcType=VARCHAR},
+      POPEDOM_ACTION = #{popedomAction,jdbcType=VARCHAR},
+      POPEDOM_TYPE = #{popedomType,jdbcType=VARCHAR},
+      POPEDOM_REMARK = #{popedomRemark,jdbcType=VARCHAR},
+      POPEDOM_PID = #{popedomPid,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      POPEDOM_LINK = #{popedomLink,jdbcType=VARCHAR},
+      POPEDOM_ICONCLS = #{popedomIconcls,jdbcType=VARCHAR},
+      POPEDOM_ORIGIN = #{popedomOrigin,jdbcType=VARCHAR}
+    where POPEDOM_ID = #{popedomId,jdbcType=VARCHAR}
+  </update>
+  <select id="findByUserId" parameterType="Popedom" resultType="Popedom">
+    		SELECT
+    PO.POPEDOM_ID,
+    PO.POPEDOM_NAME,
+    PO.POPEDOM_ACTION,
+    PO.POPEDOM_TYPE,
+    PO.POPEDOM_REMARK,
+    PO.POPEDOM_PID,
+    PO.POPEDOM_LINK,
+    PO.POPEDOM_ICONCLS,
+    PO.POPEDOM_ORIGIN
+    FROM
+		TBL_OPERATOR OP,
+		TBL_ROLE RO,
+		TBL_ROLE_POPEDOM TP,
+		TBL_POPEDOM PO
+    where
+		OP.ROLE_ID = RO.ROLE_ID
+		AND RO.ROLE_ID = TP.ROLE_ID
+		AND TP.POPEDOM_ID = PO.POPEDOM_ID
+		AND
+    OP.OP_ID = #{OP_ID}
+    ORDER BY TP.POPEDOM_ID
+  </select>
+  <select id="findPopedomchild" parameterType="Popedom" resultType="Popedom">
+      SELECT * from TBL_POPEDOM WHERE POPEDOM_PID = #{popedomId};
+  </select>
+</mapper>

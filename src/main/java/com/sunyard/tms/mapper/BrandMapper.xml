@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.BrandMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.Brand" >
+    <id column="BRAND_ID" property="brandId" jdbcType="VARCHAR" />
+    <result column="BRAND_NAME" property="brandName" jdbcType="VARCHAR" />
+    <result column="BRAND_LINKMAN" property="brandLinkman" jdbcType="VARCHAR" />
+    <result column="BRAND_TEL" property="brandTel" jdbcType="VARCHAR" />
+    <result column="TMS_DYNAMIC_LIBRARY_PATH" property="tmsDynamicLibraryPath" jdbcType="VARCHAR" />
+    <result column="TMS_RULE_LIBRARY_PATH" property="tmsRuleLibraryPath" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BRAND_ID, BRAND_NAME, BRAND_LINKMAN, BRAND_TEL, TMS_DYNAMIC_LIBRARY_PATH, TMS_RULE_LIBRARY_PATH, 
+    CREATED_DATETIME, UPDATE_DATETIME, BAK1, BAK2, BAK3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.BrandExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE_BRAND
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE_BRAND
+    where BRAND_ID = #{brandId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_DEVICE_BRAND
+    where BRAND_ID = #{brandId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.BrandExample" >
+    delete from TBL_DEVICE_BRAND
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.Brand" >
+    insert into TBL_DEVICE_BRAND (BRAND_ID, BRAND_NAME, BRAND_LINKMAN, 
+      BRAND_TEL, TMS_DYNAMIC_LIBRARY_PATH, TMS_RULE_LIBRARY_PATH, 
+      CREATED_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3)
+    values (#{brandId,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{brandLinkman,jdbcType=VARCHAR}, 
+      #{brandTel,jdbcType=VARCHAR}, #{tmsDynamicLibraryPath,jdbcType=VARCHAR}, #{tmsRuleLibraryPath,jdbcType=VARCHAR}, 
+      #{createdDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.Brand" >
+    insert into TBL_DEVICE_BRAND
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="brandId != null" >
+        BRAND_ID,
+      </if>
+      <if test="brandName != null" >
+        BRAND_NAME,
+      </if>
+      <if test="brandLinkman != null" >
+        BRAND_LINKMAN,
+      </if>
+      <if test="brandTel != null" >
+        BRAND_TEL,
+      </if>
+      <if test="tmsDynamicLibraryPath != null" >
+        TMS_DYNAMIC_LIBRARY_PATH,
+      </if>
+      <if test="tmsRuleLibraryPath != null" >
+        TMS_RULE_LIBRARY_PATH,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLinkman != null" >
+        #{brandLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="brandTel != null" >
+        #{brandTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsDynamicLibraryPath != null" >
+        #{tmsDynamicLibraryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsRuleLibraryPath != null" >
+        #{tmsRuleLibraryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.BrandExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_DEVICE_BRAND
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_DEVICE_BRAND
+    <set >
+      <if test="record.brandId != null" >
+        BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null" >
+        BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandLinkman != null" >
+        BRAND_LINKMAN = #{record.brandLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandTel != null" >
+        BRAND_TEL = #{record.brandTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmsDynamicLibraryPath != null" >
+        TMS_DYNAMIC_LIBRARY_PATH = #{record.tmsDynamicLibraryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmsRuleLibraryPath != null" >
+        TMS_RULE_LIBRARY_PATH = #{record.tmsRuleLibraryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_DEVICE_BRAND
+    set BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      BRAND_LINKMAN = #{record.brandLinkman,jdbcType=VARCHAR},
+      BRAND_TEL = #{record.brandTel,jdbcType=VARCHAR},
+      TMS_DYNAMIC_LIBRARY_PATH = #{record.tmsDynamicLibraryPath,jdbcType=VARCHAR},
+      TMS_RULE_LIBRARY_PATH = #{record.tmsRuleLibraryPath,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.Brand" >
+    update TBL_DEVICE_BRAND
+    <set >
+      <if test="brandName != null" >
+        BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLinkman != null" >
+        BRAND_LINKMAN = #{brandLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="brandTel != null" >
+        BRAND_TEL = #{brandTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsDynamicLibraryPath != null" >
+        TMS_DYNAMIC_LIBRARY_PATH = #{tmsDynamicLibraryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsRuleLibraryPath != null" >
+        TMS_RULE_LIBRARY_PATH = #{tmsRuleLibraryPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BRAND_ID = #{brandId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.Brand" >
+    update TBL_DEVICE_BRAND
+    set BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      BRAND_LINKMAN = #{brandLinkman,jdbcType=VARCHAR},
+      BRAND_TEL = #{brandTel,jdbcType=VARCHAR},
+      TMS_DYNAMIC_LIBRARY_PATH = #{tmsDynamicLibraryPath,jdbcType=VARCHAR},
+      TMS_RULE_LIBRARY_PATH = #{tmsRuleLibraryPath,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR}
+    where BRAND_ID = #{brandId,jdbcType=VARCHAR}
+  </update>
+</mapper>

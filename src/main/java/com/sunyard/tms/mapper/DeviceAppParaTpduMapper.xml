@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.DeviceAppParaTpduMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.DeviceAppParaTpdu" >
+    <id column="TPDU_ID" property="tpduId" jdbcType="VARCHAR" />
+    <result column="PARA_ID" property="paraId" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="VAL" property="val" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TPDU_ID, PARA_ID, CODE, VAL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.DeviceAppParaTpduExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE_APP_PARA_TPDU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_DEVICE_APP_PARA_TPDU
+    where TPDU_ID = #{tpduId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_DEVICE_APP_PARA_TPDU
+    where TPDU_ID = #{tpduId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.DeviceAppParaTpduExample" >
+    delete from TBL_DEVICE_APP_PARA_TPDU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.DeviceAppParaTpdu" >
+    insert into TBL_DEVICE_APP_PARA_TPDU (TPDU_ID, PARA_ID, CODE, 
+      VAL)
+    values (#{tpduId,jdbcType=VARCHAR}, #{paraId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{val,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.DeviceAppParaTpdu" >
+    insert into TBL_DEVICE_APP_PARA_TPDU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tpduId != null" >
+        TPDU_ID,
+      </if>
+      <if test="paraId != null" >
+        PARA_ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="val != null" >
+        VAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tpduId != null" >
+        #{tpduId,jdbcType=VARCHAR},
+      </if>
+      <if test="paraId != null" >
+        #{paraId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="val != null" >
+        #{val,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.DeviceAppParaTpduExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_DEVICE_APP_PARA_TPDU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_DEVICE_APP_PARA_TPDU
+    <set >
+      <if test="record.tpduId != null" >
+        TPDU_ID = #{record.tpduId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paraId != null" >
+        PARA_ID = #{record.paraId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.val != null" >
+        VAL = #{record.val,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_DEVICE_APP_PARA_TPDU
+    set TPDU_ID = #{record.tpduId,jdbcType=VARCHAR},
+      PARA_ID = #{record.paraId,jdbcType=VARCHAR},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      VAL = #{record.val,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.DeviceAppParaTpdu" >
+    update TBL_DEVICE_APP_PARA_TPDU
+    <set >
+      <if test="paraId != null" >
+        PARA_ID = #{paraId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="val != null" >
+        VAL = #{val,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TPDU_ID = #{tpduId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.DeviceAppParaTpdu" >
+    update TBL_DEVICE_APP_PARA_TPDU
+    set PARA_ID = #{paraId,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      VAL = #{val,jdbcType=VARCHAR}
+    where TPDU_ID = #{tpduId,jdbcType=VARCHAR}
+  </update>
+</mapper>

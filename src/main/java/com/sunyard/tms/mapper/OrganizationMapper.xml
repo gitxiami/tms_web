@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.Organization" >
+    <id column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_PID" property="orgPid" jdbcType="VARCHAR" />
+    <result column="ORG_LV" property="orgLv" jdbcType="VARCHAR" />
+    <result column="ORG_STATUS" property="orgStatus" jdbcType="VARCHAR" />
+    <result column="ORG_ADDRESS" property="orgAddress" jdbcType="VARCHAR" />
+    <result column="ORG_LINKMAN" property="orgLinkman" jdbcType="VARCHAR" />
+    <result column="ORG_TEL" property="orgTel" jdbcType="VARCHAR" />
+    <result column="ORG_REMARK" property="orgRemark" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+    <result column="ORG_TYPE" property="orgType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ORG_ID, ORG_NAME, ORG_PID, ORG_LV, ORG_STATUS, ORG_ADDRESS, ORG_LINKMAN, ORG_TEL, 
+    ORG_REMARK, CREATED_DATETIME, UPDATE_DATETIME, BAK1, BAK2, BAK3, ORG_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.OrganizationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_ORGANIZATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_ORGANIZATION
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_ORGANIZATION
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.OrganizationExample" >
+    delete from TBL_ORGANIZATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.Organization" >
+    insert into TBL_ORGANIZATION (ORG_ID, ORG_NAME, ORG_PID, 
+      ORG_LV, ORG_STATUS, ORG_ADDRESS, 
+      ORG_LINKMAN, ORG_TEL, ORG_REMARK, 
+      CREATED_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3, ORG_TYPE
+      )
+    values (#{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgPid,jdbcType=VARCHAR}, 
+      #{orgLv,jdbcType=VARCHAR}, #{orgStatus,jdbcType=VARCHAR}, #{orgAddress,jdbcType=VARCHAR}, 
+      #{orgLinkman,jdbcType=VARCHAR}, #{orgTel,jdbcType=VARCHAR}, #{orgRemark,jdbcType=VARCHAR}, 
+      #{createdDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.Organization" >
+    insert into TBL_ORGANIZATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="orgPid != null" >
+        ORG_PID,
+      </if>
+      <if test="orgLv != null" >
+        ORG_LV,
+      </if>
+      <if test="orgStatus != null" >
+        ORG_STATUS,
+      </if>
+      <if test="orgAddress != null" >
+        ORG_ADDRESS,
+      </if>
+      <if test="orgLinkman != null" >
+        ORG_LINKMAN,
+      </if>
+      <if test="orgTel != null" >
+        ORG_TEL,
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+      <if test="orgType != null" >
+        ORG_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPid != null" >
+        #{orgPid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLv != null" >
+        #{orgLv,jdbcType=VARCHAR},
+      </if>
+      <if test="orgStatus != null" >
+        #{orgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddress != null" >
+        #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLinkman != null" >
+        #{orgLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTel != null" >
+        #{orgTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRemark != null" >
+        #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.OrganizationExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_ORGANIZATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_ORGANIZATION
+    <set >
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgPid != null" >
+        ORG_PID = #{record.orgPid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLv != null" >
+        ORG_LV = #{record.orgLv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgStatus != null" >
+        ORG_STATUS = #{record.orgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgAddress != null" >
+        ORG_ADDRESS = #{record.orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLinkman != null" >
+        ORG_LINKMAN = #{record.orgLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgTel != null" >
+        ORG_TEL = #{record.orgTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgRemark != null" >
+        ORG_REMARK = #{record.orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgType != null" >
+        ORG_TYPE = #{record.orgType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_ORGANIZATION
+    set ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      ORG_PID = #{record.orgPid,jdbcType=VARCHAR},
+      ORG_LV = #{record.orgLv,jdbcType=VARCHAR},
+      ORG_STATUS = #{record.orgStatus,jdbcType=VARCHAR},
+      ORG_ADDRESS = #{record.orgAddress,jdbcType=VARCHAR},
+      ORG_LINKMAN = #{record.orgLinkman,jdbcType=VARCHAR},
+      ORG_TEL = #{record.orgTel,jdbcType=VARCHAR},
+      ORG_REMARK = #{record.orgRemark,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      ORG_TYPE = #{record.orgType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.Organization" >
+    update TBL_ORGANIZATION
+    <set >
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPid != null" >
+        ORG_PID = #{orgPid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLv != null" >
+        ORG_LV = #{orgLv,jdbcType=VARCHAR},
+      </if>
+      <if test="orgStatus != null" >
+        ORG_STATUS = #{orgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddress != null" >
+        ORG_ADDRESS = #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLinkman != null" >
+        ORG_LINKMAN = #{orgLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTel != null" >
+        ORG_TEL = #{orgTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.Organization" >
+    update TBL_ORGANIZATION
+    set ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_PID = #{orgPid,jdbcType=VARCHAR},
+      ORG_LV = #{orgLv,jdbcType=VARCHAR},
+      ORG_STATUS = #{orgStatus,jdbcType=VARCHAR},
+      ORG_ADDRESS = #{orgAddress,jdbcType=VARCHAR},
+      ORG_LINKMAN = #{orgLinkman,jdbcType=VARCHAR},
+      ORG_TEL = #{orgTel,jdbcType=VARCHAR},
+      ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      ORG_TYPE = #{orgType,jdbcType=VARCHAR}
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <select id="findOrgList" parameterType="string" resultType="Organization">
+    select * from TBL_ORGANIZATION where FIND_IN_SET(ORG_ID,getChildrenOrg(#{topId}))
+  </select>
+</mapper>

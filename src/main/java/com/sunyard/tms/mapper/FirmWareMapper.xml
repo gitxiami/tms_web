@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.FirmWareMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.FirmWare" >
+    <id column="FIRM_ID" property="firmId" jdbcType="VARCHAR" />
+    <result column="FIRM_NAME" property="firmName" jdbcType="VARCHAR" />
+    <result column="FIRM_DESC" property="firmDesc" jdbcType="VARCHAR" />
+    <result column="FIRM_STATUS" property="firmStatus" jdbcType="VARCHAR" />
+    <result column="FIRM_VER" property="firmVer" jdbcType="VARCHAR" />
+    <result column="FIRM_DOWNLOAD_FLAG" property="firmDownloadFlag" jdbcType="VARCHAR" />
+    <result column="FIRM_FILE_PATH" property="firmFilePath" jdbcType="VARCHAR" />
+    <result column="FIRM_FOLDER_PATH" property="firmFolderPath" jdbcType="VARCHAR" />
+    <result column="FIRM_LEN" property="firmLen" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FIRM_ID, FIRM_NAME, FIRM_DESC, FIRM_STATUS, FIRM_VER, FIRM_DOWNLOAD_FLAG, FIRM_FILE_PATH, 
+    FIRM_FOLDER_PATH, FIRM_LEN, CREATED_DATETIME, UPDATE_DATETIME, BAK1, BAK2, BAK3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.FirmWareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_FIRM_WARE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_FIRM_WARE
+    where FIRM_ID = #{firmId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_FIRM_WARE
+    where FIRM_ID = #{firmId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.FirmWareExample" >
+    delete from TBL_FIRM_WARE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.FirmWare" >
+    insert into TBL_FIRM_WARE (FIRM_ID, FIRM_NAME, FIRM_DESC, 
+      FIRM_STATUS, FIRM_VER, FIRM_DOWNLOAD_FLAG, 
+      FIRM_FILE_PATH, FIRM_FOLDER_PATH, FIRM_LEN, 
+      CREATED_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3)
+    values (#{firmId,jdbcType=VARCHAR}, #{firmName,jdbcType=VARCHAR}, #{firmDesc,jdbcType=VARCHAR}, 
+      #{firmStatus,jdbcType=VARCHAR}, #{firmVer,jdbcType=VARCHAR}, #{firmDownloadFlag,jdbcType=VARCHAR}, 
+      #{firmFilePath,jdbcType=VARCHAR}, #{firmFolderPath,jdbcType=VARCHAR}, #{firmLen,jdbcType=VARCHAR}, 
+      #{createdDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.FirmWare" >
+    insert into TBL_FIRM_WARE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="firmId != null" >
+        FIRM_ID,
+      </if>
+      <if test="firmName != null" >
+        FIRM_NAME,
+      </if>
+      <if test="firmDesc != null" >
+        FIRM_DESC,
+      </if>
+      <if test="firmStatus != null" >
+        FIRM_STATUS,
+      </if>
+      <if test="firmVer != null" >
+        FIRM_VER,
+      </if>
+      <if test="firmDownloadFlag != null" >
+        FIRM_DOWNLOAD_FLAG,
+      </if>
+      <if test="firmFilePath != null" >
+        FIRM_FILE_PATH,
+      </if>
+      <if test="firmFolderPath != null" >
+        FIRM_FOLDER_PATH,
+      </if>
+      <if test="firmLen != null" >
+        FIRM_LEN,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="firmId != null" >
+        #{firmId,jdbcType=VARCHAR},
+      </if>
+      <if test="firmName != null" >
+        #{firmName,jdbcType=VARCHAR},
+      </if>
+      <if test="firmDesc != null" >
+        #{firmDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firmStatus != null" >
+        #{firmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="firmVer != null" >
+        #{firmVer,jdbcType=VARCHAR},
+      </if>
+      <if test="firmDownloadFlag != null" >
+        #{firmDownloadFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="firmFilePath != null" >
+        #{firmFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="firmFolderPath != null" >
+        #{firmFolderPath,jdbcType=VARCHAR},
+      </if>
+      <if test="firmLen != null" >
+        #{firmLen,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.FirmWareExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_FIRM_WARE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_FIRM_WARE
+    <set >
+      <if test="record.firmId != null" >
+        FIRM_ID = #{record.firmId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmName != null" >
+        FIRM_NAME = #{record.firmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmDesc != null" >
+        FIRM_DESC = #{record.firmDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmStatus != null" >
+        FIRM_STATUS = #{record.firmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmVer != null" >
+        FIRM_VER = #{record.firmVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmDownloadFlag != null" >
+        FIRM_DOWNLOAD_FLAG = #{record.firmDownloadFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmFilePath != null" >
+        FIRM_FILE_PATH = #{record.firmFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmFolderPath != null" >
+        FIRM_FOLDER_PATH = #{record.firmFolderPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmLen != null" >
+        FIRM_LEN = #{record.firmLen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_FIRM_WARE
+    set FIRM_ID = #{record.firmId,jdbcType=VARCHAR},
+      FIRM_NAME = #{record.firmName,jdbcType=VARCHAR},
+      FIRM_DESC = #{record.firmDesc,jdbcType=VARCHAR},
+      FIRM_STATUS = #{record.firmStatus,jdbcType=VARCHAR},
+      FIRM_VER = #{record.firmVer,jdbcType=VARCHAR},
+      FIRM_DOWNLOAD_FLAG = #{record.firmDownloadFlag,jdbcType=VARCHAR},
+      FIRM_FILE_PATH = #{record.firmFilePath,jdbcType=VARCHAR},
+      FIRM_FOLDER_PATH = #{record.firmFolderPath,jdbcType=VARCHAR},
+      FIRM_LEN = #{record.firmLen,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.FirmWare" >
+    update TBL_FIRM_WARE
+    <set >
+      <if test="firmName != null" >
+        FIRM_NAME = #{firmName,jdbcType=VARCHAR},
+      </if>
+      <if test="firmDesc != null" >
+        FIRM_DESC = #{firmDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firmStatus != null" >
+        FIRM_STATUS = #{firmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="firmVer != null" >
+        FIRM_VER = #{firmVer,jdbcType=VARCHAR},
+      </if>
+      <if test="firmDownloadFlag != null" >
+        FIRM_DOWNLOAD_FLAG = #{firmDownloadFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="firmFilePath != null" >
+        FIRM_FILE_PATH = #{firmFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="firmFolderPath != null" >
+        FIRM_FOLDER_PATH = #{firmFolderPath,jdbcType=VARCHAR},
+      </if>
+      <if test="firmLen != null" >
+        FIRM_LEN = #{firmLen,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FIRM_ID = #{firmId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.FirmWare" >
+    update TBL_FIRM_WARE
+    set FIRM_NAME = #{firmName,jdbcType=VARCHAR},
+      FIRM_DESC = #{firmDesc,jdbcType=VARCHAR},
+      FIRM_STATUS = #{firmStatus,jdbcType=VARCHAR},
+      FIRM_VER = #{firmVer,jdbcType=VARCHAR},
+      FIRM_DOWNLOAD_FLAG = #{firmDownloadFlag,jdbcType=VARCHAR},
+      FIRM_FILE_PATH = #{firmFilePath,jdbcType=VARCHAR},
+      FIRM_FOLDER_PATH = #{firmFolderPath,jdbcType=VARCHAR},
+      FIRM_LEN = #{firmLen,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR}
+    where FIRM_ID = #{firmId,jdbcType=VARCHAR}
+  </update>
+</mapper>

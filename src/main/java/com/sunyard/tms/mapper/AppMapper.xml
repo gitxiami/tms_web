@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.AppMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.App" >
+    <id column="APP_ID" property="appId" jdbcType="VARCHAR" />
+    <result column="APP_NAME" property="appName" jdbcType="VARCHAR" />
+    <result column="BRAND_ID" property="brandId" jdbcType="VARCHAR" />
+    <result column="APP_DESC" property="appDesc" jdbcType="VARCHAR" />
+    <result column="APP_CONTACT" property="appContact" jdbcType="VARCHAR" />
+    <result column="APP_STATUS" property="appStatus" jdbcType="VARCHAR" />
+    <result column="MODEL_ID" property="modelId" jdbcType="VARCHAR" />
+    <result column="APP_TYPE" property="appType" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+    <result column="APP_ICON_TYPE" property="appIconType" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sunyard.tms.entity.App" extends="BaseResultMap" >
+    <result column="APP_ICON" property="appIcon" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    APP_ID, APP_NAME, BRAND_ID, APP_DESC, APP_CONTACT, APP_STATUS, MODEL_ID, APP_TYPE, 
+    CREATED_DATETIME, UPDATE_DATETIME, BAK1, BAK2, BAK3, APP_ICON_TYPE
+  </sql>
+  <sql id="Blob_Column_List" >
+    APP_ICON
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sunyard.tms.entity.AppExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TBL_APP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.AppExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_APP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TBL_APP
+    where APP_ID = #{appId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_APP
+    where APP_ID = #{appId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.AppExample" >
+    delete from TBL_APP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.App" >
+    insert into TBL_APP (APP_ID, APP_NAME, BRAND_ID, 
+      APP_DESC, APP_CONTACT, APP_STATUS, 
+      MODEL_ID, APP_TYPE, CREATED_DATETIME, 
+      UPDATE_DATETIME, BAK1, BAK2, 
+      BAK3, APP_ICON_TYPE, APP_ICON
+      )
+    values (#{appId,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, 
+      #{appDesc,jdbcType=VARCHAR}, #{appContact,jdbcType=VARCHAR}, #{appStatus,jdbcType=VARCHAR}, 
+      #{modelId,jdbcType=VARCHAR}, #{appType,jdbcType=VARCHAR}, #{createdDatetime,jdbcType=VARCHAR}, 
+      #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, 
+      #{bak3,jdbcType=VARCHAR}, #{appIconType,jdbcType=VARCHAR}, #{appIcon,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.App" >
+    insert into TBL_APP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appId != null" >
+        APP_ID,
+      </if>
+      <if test="appName != null" >
+        APP_NAME,
+      </if>
+      <if test="brandId != null" >
+        BRAND_ID,
+      </if>
+      <if test="appDesc != null" >
+        APP_DESC,
+      </if>
+      <if test="appContact != null" >
+        APP_CONTACT,
+      </if>
+      <if test="appStatus != null" >
+        APP_STATUS,
+      </if>
+      <if test="modelId != null" >
+        MODEL_ID,
+      </if>
+      <if test="appType != null" >
+        APP_TYPE,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+      <if test="appIconType != null" >
+        APP_ICON_TYPE,
+      </if>
+      <if test="appIcon != null" >
+        APP_ICON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null" >
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="appDesc != null" >
+        #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="appContact != null" >
+        #{appContact,jdbcType=VARCHAR},
+      </if>
+      <if test="appStatus != null" >
+        #{appStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null" >
+        #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="appIconType != null" >
+        #{appIconType,jdbcType=VARCHAR},
+      </if>
+      <if test="appIcon != null" >
+        #{appIcon,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.AppExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_APP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_APP
+    <set >
+      <if test="record.appId != null" >
+        APP_ID = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appName != null" >
+        APP_NAME = #{record.appName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandId != null" >
+        BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appDesc != null" >
+        APP_DESC = #{record.appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appContact != null" >
+        APP_CONTACT = #{record.appContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appStatus != null" >
+        APP_STATUS = #{record.appStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null" >
+        MODEL_ID = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appType != null" >
+        APP_TYPE = #{record.appType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appIconType != null" >
+        APP_ICON_TYPE = #{record.appIconType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appIcon != null" >
+        APP_ICON = #{record.appIcon,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update TBL_APP
+    set APP_ID = #{record.appId,jdbcType=VARCHAR},
+      APP_NAME = #{record.appName,jdbcType=VARCHAR},
+      BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      APP_DESC = #{record.appDesc,jdbcType=VARCHAR},
+      APP_CONTACT = #{record.appContact,jdbcType=VARCHAR},
+      APP_STATUS = #{record.appStatus,jdbcType=VARCHAR},
+      MODEL_ID = #{record.modelId,jdbcType=VARCHAR},
+      APP_TYPE = #{record.appType,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      APP_ICON_TYPE = #{record.appIconType,jdbcType=VARCHAR},
+      APP_ICON = #{record.appIcon,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_APP
+    set APP_ID = #{record.appId,jdbcType=VARCHAR},
+      APP_NAME = #{record.appName,jdbcType=VARCHAR},
+      BRAND_ID = #{record.brandId,jdbcType=VARCHAR},
+      APP_DESC = #{record.appDesc,jdbcType=VARCHAR},
+      APP_CONTACT = #{record.appContact,jdbcType=VARCHAR},
+      APP_STATUS = #{record.appStatus,jdbcType=VARCHAR},
+      MODEL_ID = #{record.modelId,jdbcType=VARCHAR},
+      APP_TYPE = #{record.appType,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      APP_ICON_TYPE = #{record.appIconType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.App" >
+    update TBL_APP
+    <set >
+      <if test="appName != null" >
+        APP_NAME = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="appDesc != null" >
+        APP_DESC = #{appDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="appContact != null" >
+        APP_CONTACT = #{appContact,jdbcType=VARCHAR},
+      </if>
+      <if test="appStatus != null" >
+        APP_STATUS = #{appStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        MODEL_ID = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null" >
+        APP_TYPE = #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="appIconType != null" >
+        APP_ICON_TYPE = #{appIconType,jdbcType=VARCHAR},
+      </if>
+      <if test="appIcon != null" >
+        APP_ICON = #{appIcon,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where APP_ID = #{appId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sunyard.tms.entity.App" >
+    update TBL_APP
+    set APP_NAME = #{appName,jdbcType=VARCHAR},
+      BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      APP_DESC = #{appDesc,jdbcType=VARCHAR},
+      APP_CONTACT = #{appContact,jdbcType=VARCHAR},
+      APP_STATUS = #{appStatus,jdbcType=VARCHAR},
+      MODEL_ID = #{modelId,jdbcType=VARCHAR},
+      APP_TYPE = #{appType,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      APP_ICON_TYPE = #{appIconType,jdbcType=VARCHAR},
+      APP_ICON = #{appIcon,jdbcType=LONGVARBINARY}
+    where APP_ID = #{appId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.App" >
+    update TBL_APP
+    set APP_NAME = #{appName,jdbcType=VARCHAR},
+      BRAND_ID = #{brandId,jdbcType=VARCHAR},
+      APP_DESC = #{appDesc,jdbcType=VARCHAR},
+      APP_CONTACT = #{appContact,jdbcType=VARCHAR},
+      APP_STATUS = #{appStatus,jdbcType=VARCHAR},
+      MODEL_ID = #{modelId,jdbcType=VARCHAR},
+      APP_TYPE = #{appType,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      APP_ICON_TYPE = #{appIconType,jdbcType=VARCHAR}
+    where APP_ID = #{appId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="findAllAppByPage" parameterType="App" resultType="com.sunyard.tms.dto.AppDto">
+    SELECT
+    TA.APP_ID,
+    TA.APP_NAME,
+    TA.BRAND_ID,
+    TA.APP_DESC,
+    TA.APP_CONTACT,
+    TA.APP_STATUS,
+    TA.APP_ICON,
+    TA.APP_ICON_TYPE,
+    TA.MODEL_ID,
+    TA.APP_TYPE,
+    TA.BAK1,
+    TB.BRAND_NAME,
+    TM.MODEL_TYPE_ID,
+    TM.MODEL_NAME,
+    ORG.ORG_NAME
+    FROM
+    TBL_APP TA,
+    TBL_DEVICE_BRAND TB,
+    TBL_DEVICE_MODEL TM,
+    TBL_ORGANIZATION ORG
+    WHERE TA.BRAND_ID = TB.BRAND_ID AND TA.MODEL_ID = TM.MODEL_ID AND TA.BAK1 = ORG.ORG_ID
+    AND APP_STATUS!='3'
+    <if test="appName!=null and appName != ''">
+      and TA.APP_NAME LIKE '%${appName}%'
+    </if>
+    <if test="brandId!=null and brandId !=''">
+      and TA.BRAND_ID = #{brandId}
+    </if>
+    <if test="modelId!=null and modelId!=''">
+      and TA.MODEL_ID LIKE '%${modelId}%'
+    </if>
+    <if test="appStatus!=null and appStatus!=''">
+      and TA.APP_STATUS = #{appStatus}
+    </if>
+  </select>
+</mapper>

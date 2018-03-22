@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.TerminalKeyMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.TerminalKey" >
+    <id column="KEY_ID" property="keyId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="TMS_CODE" property="tmsCode" jdbcType="VARCHAR" />
+    <result column="TMK" property="tmk" jdbcType="VARCHAR" />
+    <result column="TAK" property="tak" jdbcType="VARCHAR" />
+    <result column="TMK_REFERENCE_NO" property="tmkReferenceNo" jdbcType="VARCHAR" />
+    <result column="CHECKSUM" property="checksum" jdbcType="VARCHAR" />
+    <result column="FILLER" property="filler" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+    <result column="USE_FLAG" property="useFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    KEY_ID, CREATE_TIME, DESCRIPTION, TMS_CODE, TMK, TAK, TMK_REFERENCE_NO, CHECKSUM, 
+    FILLER, CREATED_DATETIME, UPDATE_DATETIME, BAK1, BAK2, BAK3, USE_FLAG
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.TerminalKeyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_TERMINAL_KEY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_TERMINAL_KEY
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_TERMINAL_KEY
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.TerminalKeyExample" >
+    delete from TBL_TERMINAL_KEY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.TerminalKey" >
+    insert into TBL_TERMINAL_KEY (KEY_ID, CREATE_TIME, DESCRIPTION, 
+      TMS_CODE, TMK, TAK, 
+      TMK_REFERENCE_NO, CHECKSUM, FILLER, 
+      CREATED_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3, USE_FLAG
+      )
+    values (#{keyId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{tmsCode,jdbcType=VARCHAR}, #{tmk,jdbcType=VARCHAR}, #{tak,jdbcType=VARCHAR}, 
+      #{tmkReferenceNo,jdbcType=VARCHAR}, #{checksum,jdbcType=VARCHAR}, #{filler,jdbcType=VARCHAR}, 
+      #{createdDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR}, #{useFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.TerminalKey" >
+    insert into TBL_TERMINAL_KEY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyId != null" >
+        KEY_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="tmsCode != null" >
+        TMS_CODE,
+      </if>
+      <if test="tmk != null" >
+        TMK,
+      </if>
+      <if test="tak != null" >
+        TAK,
+      </if>
+      <if test="tmkReferenceNo != null" >
+        TMK_REFERENCE_NO,
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM,
+      </if>
+      <if test="filler != null" >
+        FILLER,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+      <if test="useFlag != null" >
+        USE_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyId != null" >
+        #{keyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsCode != null" >
+        #{tmsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tmk != null" >
+        #{tmk,jdbcType=VARCHAR},
+      </if>
+      <if test="tak != null" >
+        #{tak,jdbcType=VARCHAR},
+      </if>
+      <if test="tmkReferenceNo != null" >
+        #{tmkReferenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null" >
+        #{checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="filler != null" >
+        #{filler,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="useFlag != null" >
+        #{useFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.TerminalKeyExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_TERMINAL_KEY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_TERMINAL_KEY
+    <set >
+      <if test="record.keyId != null" >
+        KEY_ID = #{record.keyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmsCode != null" >
+        TMS_CODE = #{record.tmsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmk != null" >
+        TMK = #{record.tmk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tak != null" >
+        TAK = #{record.tak,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmkReferenceNo != null" >
+        TMK_REFERENCE_NO = #{record.tmkReferenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checksum != null" >
+        CHECKSUM = #{record.checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler != null" >
+        FILLER = #{record.filler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useFlag != null" >
+        USE_FLAG = #{record.useFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_TERMINAL_KEY
+    set KEY_ID = #{record.keyId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      TMS_CODE = #{record.tmsCode,jdbcType=VARCHAR},
+      TMK = #{record.tmk,jdbcType=VARCHAR},
+      TAK = #{record.tak,jdbcType=VARCHAR},
+      TMK_REFERENCE_NO = #{record.tmkReferenceNo,jdbcType=VARCHAR},
+      CHECKSUM = #{record.checksum,jdbcType=VARCHAR},
+      FILLER = #{record.filler,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      USE_FLAG = #{record.useFlag,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.TerminalKey" >
+    update TBL_TERMINAL_KEY
+    <set >
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="tmsCode != null" >
+        TMS_CODE = #{tmsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tmk != null" >
+        TMK = #{tmk,jdbcType=VARCHAR},
+      </if>
+      <if test="tak != null" >
+        TAK = #{tak,jdbcType=VARCHAR},
+      </if>
+      <if test="tmkReferenceNo != null" >
+        TMK_REFERENCE_NO = #{tmkReferenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checksum != null" >
+        CHECKSUM = #{checksum,jdbcType=VARCHAR},
+      </if>
+      <if test="filler != null" >
+        FILLER = #{filler,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="useFlag != null" >
+        USE_FLAG = #{useFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.TerminalKey" >
+    update TBL_TERMINAL_KEY
+    set CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      TMS_CODE = #{tmsCode,jdbcType=VARCHAR},
+      TMK = #{tmk,jdbcType=VARCHAR},
+      TAK = #{tak,jdbcType=VARCHAR},
+      TMK_REFERENCE_NO = #{tmkReferenceNo,jdbcType=VARCHAR},
+      CHECKSUM = #{checksum,jdbcType=VARCHAR},
+      FILLER = #{filler,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      USE_FLAG = #{useFlag,jdbcType=VARCHAR}
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </update>
+  <select id="queryDevKey" parameterType="java.lang.String" resultType="com.sunyard.tms.entity.TerminalKey" >
+    SELECT tk.*
+	FROM TBL_DEVICE td
+	LEFT JOIN TBL_TERMINAL_KEY tk
+	ON tk.KEY_ID           = td.DEV_TMK
+	WHERE td.DEVICE_STATUS = 1
+	AND td.DEVICE_SN       = #{devSn}
+  </select>
+</mapper>

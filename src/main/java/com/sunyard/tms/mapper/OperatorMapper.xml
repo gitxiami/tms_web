@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunyard.tms.mapper.OperatorMapper" >
+  <resultMap id="BaseResultMap" type="com.sunyard.tms.entity.Operator" >
+    <id column="OP_ID" property="opId" jdbcType="VARCHAR" />
+    <result column="OP_USERNAME" property="opUsername" jdbcType="VARCHAR" />
+    <result column="OP_PWD" property="opPwd" jdbcType="VARCHAR" />
+    <result column="OP_REALNAME" property="opRealname" jdbcType="VARCHAR" />
+    <result column="OP_STATUS" property="opStatus" jdbcType="VARCHAR" />
+    <result column="OP_TEL" property="opTel" jdbcType="VARCHAR" />
+    <result column="OP_PWD_ERRNUM" property="opPwdErrnum" jdbcType="INTEGER" />
+    <result column="OP_REMARK" property="opRemark" jdbcType="VARCHAR" />
+    <result column="OP_LAST_LOGIN_TIME" property="opLastLoginTime" jdbcType="VARCHAR" />
+    <result column="OP_ERRORTIME" property="opErrortime" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    <result column="CREATED_DATETIME" property="createdDatetime" jdbcType="VARCHAR" />
+    <result column="UPDATE_DATETIME" property="updateDatetime" jdbcType="VARCHAR" />
+    <result column="BAK1" property="bak1" jdbcType="VARCHAR" />
+    <result column="BAK2" property="bak2" jdbcType="VARCHAR" />
+    <result column="BAK3" property="bak3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OP_ID, OP_USERNAME, OP_PWD, OP_REALNAME, OP_STATUS, OP_TEL, OP_PWD_ERRNUM, OP_REMARK, 
+    OP_LAST_LOGIN_TIME, OP_ERRORTIME, ROLE_ID, ORG_ID, CREATED_DATETIME, UPDATE_DATETIME, 
+    BAK1, BAK2, BAK3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sunyard.tms.entity.OperatorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_OPERATOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_OPERATOR
+    where OP_ID = #{opId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_OPERATOR
+    where OP_ID = #{opId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sunyard.tms.entity.OperatorExample" >
+    delete from TBL_OPERATOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sunyard.tms.entity.Operator" >
+    insert into TBL_OPERATOR (OP_ID, OP_USERNAME, OP_PWD, 
+      OP_REALNAME, OP_STATUS, OP_TEL, 
+      OP_PWD_ERRNUM, OP_REMARK, OP_LAST_LOGIN_TIME, 
+      OP_ERRORTIME, ROLE_ID, ORG_ID, 
+      CREATED_DATETIME, UPDATE_DATETIME, BAK1, 
+      BAK2, BAK3)
+    values (#{opId,jdbcType=VARCHAR}, #{opUsername,jdbcType=VARCHAR}, #{opPwd,jdbcType=VARCHAR}, 
+      #{opRealname,jdbcType=VARCHAR}, #{opStatus,jdbcType=VARCHAR}, #{opTel,jdbcType=VARCHAR}, 
+      #{opPwdErrnum,jdbcType=INTEGER}, #{opRemark,jdbcType=VARCHAR}, #{opLastLoginTime,jdbcType=VARCHAR}, 
+      #{opErrortime,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{createdDatetime,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, 
+      #{bak2,jdbcType=VARCHAR}, #{bak3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunyard.tms.entity.Operator" >
+    insert into TBL_OPERATOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="opId != null" >
+        OP_ID,
+      </if>
+      <if test="opUsername != null" >
+        OP_USERNAME,
+      </if>
+      <if test="opPwd != null" >
+        OP_PWD,
+      </if>
+      <if test="opRealname != null" >
+        OP_REALNAME,
+      </if>
+      <if test="opStatus != null" >
+        OP_STATUS,
+      </if>
+      <if test="opTel != null" >
+        OP_TEL,
+      </if>
+      <if test="opPwdErrnum != null" >
+        OP_PWD_ERRNUM,
+      </if>
+      <if test="opRemark != null" >
+        OP_REMARK,
+      </if>
+      <if test="opLastLoginTime != null" >
+        OP_LAST_LOGIN_TIME,
+      </if>
+      <if test="opErrortime != null" >
+        OP_ERRORTIME,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME,
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME,
+      </if>
+      <if test="bak1 != null" >
+        BAK1,
+      </if>
+      <if test="bak2 != null" >
+        BAK2,
+      </if>
+      <if test="bak3 != null" >
+        BAK3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="opId != null" >
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="opUsername != null" >
+        #{opUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="opPwd != null" >
+        #{opPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="opRealname != null" >
+        #{opRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="opStatus != null" >
+        #{opStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="opTel != null" >
+        #{opTel,jdbcType=VARCHAR},
+      </if>
+      <if test="opPwdErrnum != null" >
+        #{opPwdErrnum,jdbcType=INTEGER},
+      </if>
+      <if test="opRemark != null" >
+        #{opRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="opLastLoginTime != null" >
+        #{opLastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="opErrortime != null" >
+        #{opErrortime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sunyard.tms.entity.OperatorExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_OPERATOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_OPERATOR
+    <set >
+      <if test="record.opId != null" >
+        OP_ID = #{record.opId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opUsername != null" >
+        OP_USERNAME = #{record.opUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opPwd != null" >
+        OP_PWD = #{record.opPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opRealname != null" >
+        OP_REALNAME = #{record.opRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opStatus != null" >
+        OP_STATUS = #{record.opStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opTel != null" >
+        OP_TEL = #{record.opTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opPwdErrnum != null" >
+        OP_PWD_ERRNUM = #{record.opPwdErrnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.opRemark != null" >
+        OP_REMARK = #{record.opRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opLastLoginTime != null" >
+        OP_LAST_LOGIN_TIME = #{record.opLastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opErrortime != null" >
+        OP_ERRORTIME = #{record.opErrortime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdDatetime != null" >
+        CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDatetime != null" >
+        UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null" >
+        BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak2 != null" >
+        BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak3 != null" >
+        BAK3 = #{record.bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_OPERATOR
+    set OP_ID = #{record.opId,jdbcType=VARCHAR},
+      OP_USERNAME = #{record.opUsername,jdbcType=VARCHAR},
+      OP_PWD = #{record.opPwd,jdbcType=VARCHAR},
+      OP_REALNAME = #{record.opRealname,jdbcType=VARCHAR},
+      OP_STATUS = #{record.opStatus,jdbcType=VARCHAR},
+      OP_TEL = #{record.opTel,jdbcType=VARCHAR},
+      OP_PWD_ERRNUM = #{record.opPwdErrnum,jdbcType=INTEGER},
+      OP_REMARK = #{record.opRemark,jdbcType=VARCHAR},
+      OP_LAST_LOGIN_TIME = #{record.opLastLoginTime,jdbcType=VARCHAR},
+      OP_ERRORTIME = #{record.opErrortime,jdbcType=VARCHAR},
+      ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+      ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{record.createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{record.updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{record.bak1,jdbcType=VARCHAR},
+      BAK2 = #{record.bak2,jdbcType=VARCHAR},
+      BAK3 = #{record.bak3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunyard.tms.entity.Operator" >
+    update TBL_OPERATOR
+    <set >
+      <if test="opUsername != null" >
+        OP_USERNAME = #{opUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="opPwd != null" >
+        OP_PWD = #{opPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="opRealname != null" >
+        OP_REALNAME = #{opRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="opStatus != null" >
+        OP_STATUS = #{opStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="opTel != null" >
+        OP_TEL = #{opTel,jdbcType=VARCHAR},
+      </if>
+      <if test="opPwdErrnum != null" >
+        OP_PWD_ERRNUM = #{opPwdErrnum,jdbcType=INTEGER},
+      </if>
+      <if test="opRemark != null" >
+        OP_REMARK = #{opRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="opLastLoginTime != null" >
+        OP_LAST_LOGIN_TIME = #{opLastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="opErrortime != null" >
+        OP_ERRORTIME = #{opErrortime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdDatetime != null" >
+        CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null" >
+        UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null" >
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null" >
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null" >
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OP_ID = #{opId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunyard.tms.entity.Operator" >
+    update TBL_OPERATOR
+    set OP_USERNAME = #{opUsername,jdbcType=VARCHAR},
+      OP_PWD = #{opPwd,jdbcType=VARCHAR},
+      OP_REALNAME = #{opRealname,jdbcType=VARCHAR},
+      OP_STATUS = #{opStatus,jdbcType=VARCHAR},
+      OP_TEL = #{opTel,jdbcType=VARCHAR},
+      OP_PWD_ERRNUM = #{opPwdErrnum,jdbcType=INTEGER},
+      OP_REMARK = #{opRemark,jdbcType=VARCHAR},
+      OP_LAST_LOGIN_TIME = #{opLastLoginTime,jdbcType=VARCHAR},
+      OP_ERRORTIME = #{opErrortime,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      CREATED_DATETIME = #{createdDatetime,jdbcType=VARCHAR},
+      UPDATE_DATETIME = #{updateDatetime,jdbcType=VARCHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR}
+    where OP_ID = #{opId,jdbcType=VARCHAR}
+  </update>
+  <select id="findAll" resultType="String">
+    select OP_USERNAME FROM TBL_OPERATOR
+  </select>
+  <select id="findOperatorById" parameterType="String"
+          resultType="com.sunyard.tms.dto.OperatorDto">
+    SELECT
+    op.OP_ID,
+    op.OP_USERNAME,
+    op.OP_REALNAME,
+    op.OP_STATUS,
+    op.OP_TEL,
+    op.OP_REMARK,
+    op.ROLE_ID,
+    ro.ROLE_NAME,
+    op.ORG_ID,
+    org.ORG_NAME
+    FROM
+    TBL_OPERATOR op,
+    TBL_ROLE ro,
+    TBL_ORGANIZATION org
+    WHERE
+    op.ROLE_ID = ro.ROLE_ID
+    AND op.ORG_ID = org.ORG_ID
+    AND
+    op.OP_ID=#{opId}
+  </select>
+  <select id="showOperator" parameterType="Operator"
+          resultType="com.sunyard.tms.dto.OperatorDto">
+    SELECT DISTINCT
+    op.OP_ID,
+    op.OP_USERNAME,
+    op.OP_REALNAME,
+    op.OP_STATUS,
+    op.OP_TEL,
+    op.OP_REMARK,
+    op.ROLE_ID,
+    ro.ROLE_NAME,
+    op.ORG_ID,
+    org.ORG_NAME,
+    org.ORG_LV
+    FROM
+    TBL_OPERATOR op,
+    TBL_ROLE ro,
+    TBL_ORGANIZATION org
+    WHERE
+    op.ROLE_ID = ro.ROLE_ID
+    AND op.ORG_ID = org.ORG_ID
+    AND op.OP_STATUS != '1'
+    AND FIND_IN_SET(org.ORG_ID,getChildrenOrg(#{orgId}))
+    <include refid="where_search_operator"></include>
+    ORDER BY org.ORG_LV
+  </select>
+  <sql id="where_search_operator">
+    <if test="opUsername!=null and opUsername!=''">
+      and op.OP_USERNAME like '%${opUsername}%'
+    </if>
+    <if test="opRealname!=null and opRealname!=''">
+      and op.OP_REALNAME like '%${opRealname}%'
+    </if>
+    <if test="roleId!=null and roleId!=''">
+      and ro.ROLE_ID =#{roleId}
+    </if>
+    <if test="orgIds!=null and orgIds.size>0 ">
+      <foreach collection="orgIds" open=" and op.ORG_ID in(" close=")"
+               item="orgId" separator=",">
+        #{orgId}
+      </foreach>
+    </if>
+    <if test="opStatus !=null and opStatus!='' ">
+      and op.OP_STATUS =#{opStatus}
+    </if>
+  </sql>
+</mapper>
